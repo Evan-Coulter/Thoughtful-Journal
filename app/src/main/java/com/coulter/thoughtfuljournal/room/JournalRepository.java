@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class JournalRepository {
-    private JournalDAO dao;
+    private final JournalDAO dao;
     private final List<Journal> journals;
 
     public JournalRepository(Application application) {
@@ -23,5 +23,13 @@ public class JournalRepository {
         JournalDatabase.writer.execute(()->{
             dao.insert(journal);
         });
+    }
+
+    public void delete(String journalName) {
+        dao.delete(journalName);
+    }
+
+    public List<Journal> search(String journalName) {
+        return dao.search(journalName);
     }
 }

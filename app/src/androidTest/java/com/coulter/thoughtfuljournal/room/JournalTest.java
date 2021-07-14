@@ -17,9 +17,9 @@ import static org.junit.Assert.fail;
 
 @RunWith(AndroidJUnit4.class)
 public class JournalTest {
-    private static final String name = "Name";
-    private static final String content = "Content";
-    private static Date date;
+    static final String name = "Name";
+    static final String content = "Content";
+    static Date date;
     static {
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse("25/12/2021");

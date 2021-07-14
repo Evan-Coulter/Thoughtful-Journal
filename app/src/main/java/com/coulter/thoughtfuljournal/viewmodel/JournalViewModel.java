@@ -3,8 +3,6 @@ package com.coulter.thoughtfuljournal.viewmodel;
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.coulter.thoughtfuljournal.room.Journal;
 import com.coulter.thoughtfuljournal.room.JournalRepository;
@@ -27,5 +25,13 @@ public class JournalViewModel extends AndroidViewModel {
 
     public void insert(Journal journal) {
         repository.insert(journal);
+    }
+
+    public void delete(String journalName) {
+        repository.delete(journalName);
+    }
+
+    public List<Journal> search(String journalName) {
+        return repository.search(journalName);
     }
 }

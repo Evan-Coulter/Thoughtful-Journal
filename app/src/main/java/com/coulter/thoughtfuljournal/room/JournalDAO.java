@@ -1,7 +1,6 @@
 package com.coulter.thoughtfuljournal.room;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -18,6 +17,6 @@ public interface JournalDAO {
     @Insert
     void insert(Journal journal);
 
-    @Delete
-    void delete(Journal... journals);
+    @Query("DELETE FROM journal_table WHERE journal_name = :journalName ")
+    void delete(String journalName);
 }
