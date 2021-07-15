@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Thoughtful Journal</string>
+    <string name="fab_description">New Journal Button</string>
+    <string name="fab_text">New Journal</string>
 </resources>
