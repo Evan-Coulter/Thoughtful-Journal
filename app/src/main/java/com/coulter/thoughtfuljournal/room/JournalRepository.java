@@ -8,14 +8,14 @@ import java.util.List;
 
 public class JournalRepository {
     private final JournalDAO dao;
-    private final List<Journal> journals;
+    private final LiveData<List<Journal>> journals;
 
     public JournalRepository(Application application) {
         dao = JournalDatabase.getInstance(application).getJournalDao();
         journals = dao.getJournals();
     }
 
-    public List<Journal> getJournals() {
+    public LiveData<List<Journal>> getJournals() {
         return journals;
     }
 

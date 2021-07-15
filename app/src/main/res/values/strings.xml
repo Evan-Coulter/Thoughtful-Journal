@@ -2,4 +2,10 @@
     <string name="app_name">Thoughtful Journal</string>
     <string name="fab_description">New Journal Button</string>
     <string name="fab_text">New Journal</string>
+    <string name="sample_title">Sample Title</string>
+    <string name="sample_date">Sample Date</string>
+    <string name="sample_journal_text">Sample Journal Text</string>
+    <string name="more_button">More Button</string>
+    <string name="expand_button_description">Expand Button</string>
+    <string name="more_button_description">More Button</string>
 </resources>
