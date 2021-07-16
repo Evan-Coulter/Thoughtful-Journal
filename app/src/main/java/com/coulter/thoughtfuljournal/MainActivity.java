@@ -2,35 +2,43 @@ package com.coulter.thoughtfuljournal;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 
 import com.coulter.thoughtfuljournal.fragments.AppBarFragment;
 import com.coulter.thoughtfuljournal.fragments.FABFragment;
-import com.coulter.thoughtfuljournal.fragments.RecyclerViewFragment;
-import com.coulter.thoughtfuljournal.room.Journal;
-import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
 
-import java.util.Calendar;
-import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setupFragment(R.id.app_bar_container, new AppBarFragment());
-        setupFragment(R.id.fab_container, new FABFragment());
-        setupFragment(R.id.main_content_container, new RecyclerViewFragment());
+        setupFragment(R.id.app_bar_container_main, new AppBarFragment());
+        setupFragment(R.id.fab_container_main, new FABFragment());
+        //recycler view and edit text fragments set by navigation api.
     }
 
-    private void setupFragment(int app_bar_container, Fragment appBarFragment) {
+    private void setupFragment(int fragmentID, Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(app_bar_container, appBarFragment)
+                .replace(fragmentID, fragment)
                 .commit();
+    }
+
+    @Override
+    public void onClick(View v) {
+        NavController navController = Navigation.findNavController(findViewById(R.id.content_container_main));
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if(destination.getId() == R.id.editJournalFragment2){
+                findViewById(R.id.fab_container_main).setVisibility(View.GONE);
+            } else {
+                findViewById(R.id.fab_container_main).setVisibility(View.VISIBLE);
+            }
+        });
+        navController.navigate(R.id.listToEdit);
     }
 }

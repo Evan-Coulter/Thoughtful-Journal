@@ -8,4 +8,8 @@
     <string name="more_button">More Button</string>
     <string name="expand_button_description">Expand Button</string>
     <string name="more_button_description">More Button</string>
+    <string name="bold_button_description">Bold Button</string>
+    <string name="italic_button_description">Italic Button</string>
+    <string name="underline_button_description">Underline Button</string>
+    <string name="size_button_description">Size Button</string>
 </resources>
