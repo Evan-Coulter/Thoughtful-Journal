@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,6 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.coulter.thoughtfuljournal.R;
+
+import org.jetbrains.annotations.NotNull;
 
 public abstract class AppBarFragment extends Fragment {
     public AppBarFragment(){}
@@ -44,5 +47,11 @@ public abstract class AppBarFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
+        return handleOnOptionsItemSelected(item);
+    }
+
+    protected abstract boolean handleOnOptionsItemSelected(MenuItem item);
     protected abstract int getMenuID();
 }
