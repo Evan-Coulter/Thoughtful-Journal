@@ -1,4 +1,4 @@
-package com.coulter.thoughtfuljournal.fragments;
+package com.coulter.thoughtfuljournal.fragments.appbarfragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,13 +7,14 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.coulter.thoughtfuljournal.R;
 
-public class AppBarFragment extends Fragment {
+public abstract class AppBarFragment extends Fragment {
     public AppBarFragment(){}
 
     @Override
@@ -38,8 +39,10 @@ public class AppBarFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main_app_bar_menu, menu);
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
+        inflater.inflate(getMenuID(), menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
+
+    protected abstract int getMenuID();
 }

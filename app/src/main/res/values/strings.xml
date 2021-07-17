@@ -12,4 +12,7 @@
     <string name="italic_button_description">Italic Button</string>
     <string name="underline_button_description">Underline Button</string>
     <string name="size_button_description">Size Button</string>
+    <string name="save_button">Save</string>
+    <string name="sort_button">Sort</string>
+    <string name="search_button">Search</string>
 </resources>

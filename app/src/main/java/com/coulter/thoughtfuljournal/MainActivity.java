@@ -8,8 +8,10 @@ import androidx.navigation.Navigation;
 import android.os.Bundle;
 import android.view.View;
 
-import com.coulter.thoughtfuljournal.fragments.AppBarFragment;
+import com.coulter.thoughtfuljournal.fragments.appbarfragments.AppBarEdit;
+import com.coulter.thoughtfuljournal.fragments.appbarfragments.AppBarFragment;
 import com.coulter.thoughtfuljournal.fragments.FABFragment;
+import com.coulter.thoughtfuljournal.fragments.appbarfragments.AppBarMain;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setupFragment(R.id.app_bar_container_main, new AppBarFragment());
+        setupFragment(R.id.app_bar_container_main, new AppBarMain());
         setupFragment(R.id.fab_container_main, new FABFragment());
         //recycler view and edit text fragments set by navigation api.
     }
@@ -35,8 +37,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if(destination.getId() == R.id.editJournalFragment2){
                 findViewById(R.id.fab_container_main).setVisibility(View.GONE);
+                setupFragment(R.id.app_bar_container_main, new AppBarEdit());
             } else {
                 findViewById(R.id.fab_container_main).setVisibility(View.VISIBLE);
+                setupFragment(R.id.app_bar_container_main, new AppBarMain());
             }
         });
         navController.navigate(R.id.listToEdit);
