@@ -10,14 +10,11 @@
         android:label="RecyclerViewFragment"
         tools:layout="@layout/recycler_view_fragment">
         <action
-            android:id="@+id/action_recyclerViewFragment_to_editJournalFragment2"
-            app:destination="@id/editJournalFragment2" />
-        <action
             android:id="@+id/listToEdit"
-            app:destination="@id/editJournalFragment2" />
+            app:destination="@id/editJournalFragment" />
     </fragment>
     <fragment
-        android:id="@+id/editJournalFragment2"
+        android:id="@+id/editJournalFragment"
         android:name="com.coulter.thoughtfuljournal.fragments.EditJournalFragment"
         android:label="EditJournalFragment"
         tools:layout="@layout/edit_journal_fragment">

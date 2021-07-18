@@ -3,7 +3,9 @@ package com.coulter.thoughtfuljournal.room;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class JournalRepository {
@@ -31,5 +33,9 @@ public class JournalRepository {
 
     public List<Journal> search(String journalName) {
         return dao.search(journalName);
+    }
+
+    public MutableLiveData<Journal> getNewJournal(){
+        return new MutableLiveData<>(new Journal("","",Calendar.getInstance().getTime()));
     }
 }

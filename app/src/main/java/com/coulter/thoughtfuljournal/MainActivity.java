@@ -9,12 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.coulter.thoughtfuljournal.fragments.appbarfragments.AppBarEdit;
-import com.coulter.thoughtfuljournal.fragments.appbarfragments.AppBarFragment;
 import com.coulter.thoughtfuljournal.fragments.FABFragment;
 import com.coulter.thoughtfuljournal.fragments.appbarfragments.AppBarMain;
 
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private int currentDestination = R.id.editToList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +35,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         NavController navController = Navigation.findNavController(findViewById(R.id.content_container_main));
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if(destination.getId() == R.id.editJournalFragment2){
+            if(destination.getId() == R.id.editJournalFragment){
                 findViewById(R.id.fab_container_main).setVisibility(View.GONE);
                 setupFragment(R.id.app_bar_container_main, new AppBarEdit());
+                currentDestination = R.id.editToList;
             } else {
                 findViewById(R.id.fab_container_main).setVisibility(View.VISIBLE);
                 setupFragment(R.id.app_bar_container_main, new AppBarMain());
+                currentDestination = R.id.listToEdit;
             }
         });
-        navController.navigate(R.id.listToEdit);
+        navController.navigate(currentDestination);
     }
 }

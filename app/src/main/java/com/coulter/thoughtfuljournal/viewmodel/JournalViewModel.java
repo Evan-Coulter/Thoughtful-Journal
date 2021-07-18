@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.coulter.thoughtfuljournal.room.Journal;
 import com.coulter.thoughtfuljournal.room.JournalRepository;
@@ -13,6 +14,7 @@ import java.util.List;
 public class JournalViewModel extends AndroidViewModel {
     private final JournalRepository repository;
     private final LiveData<List<Journal>> journals;
+    public MutableLiveData<Journal> currentJournal;
 
     public JournalViewModel(Application application){
         super(application);
@@ -34,5 +36,9 @@ public class JournalViewModel extends AndroidViewModel {
 
     public List<Journal> search(String journalName) {
         return repository.search(journalName);
+    }
+
+    public void postNewJournal() {
+        currentJournal = repository.getNewJournal();
     }
 }
