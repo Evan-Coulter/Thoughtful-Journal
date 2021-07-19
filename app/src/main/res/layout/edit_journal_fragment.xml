@@ -22,7 +22,7 @@
             android:gravity="start|top"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
-            android:text="@={viewmodel.currentJournal.journal_name}"
+            android:text="@={viewmodel.currentJournal.journal_content}"
             tools:ignore="LabelFor" />
 
         <LinearLayout

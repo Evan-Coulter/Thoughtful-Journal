@@ -1,7 +1,6 @@
 package com.coulter.thoughtfuljournal.recyclerview;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import java.util.List;
 
 public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHolder> {
     private final List<Journal> journals;
+    private JournalListClickListener clickListener;
 
     public JournalListAdapter(List<Journal> journals) {
         this.journals = journals;
@@ -42,11 +42,20 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHold
             .format(journals.get(position)
             .creation_date)
         );
-        holder.getJournal().setText(journals.get(position).journal_name);
+        holder.getJournal().setText(journals.get(position).journal_content);
+        holder.setOnClickListener(clickListener);
     }
 
     @Override
     public int getItemCount() {
         return journals.size();
+    }
+
+    public Journal getJournal(int position){
+        return journals.get(position);
+    }
+
+    public void setOnClickListener(JournalListClickListener listener){
+        clickListener = listener;
     }
 }

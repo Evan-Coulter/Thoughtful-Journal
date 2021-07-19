@@ -23,8 +23,6 @@ public class EditJournalFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
-        viewModel.postNewJournal();
     }
 
     @Override

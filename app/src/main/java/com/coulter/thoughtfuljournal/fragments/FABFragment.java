@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.coulter.thoughtfuljournal.MainActivity;
 import com.coulter.thoughtfuljournal.R;
+import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
@@ -29,6 +31,10 @@ public class FABFragment extends Fragment {
     @Override
     public void onViewCreated(@NotNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        fab.setOnClickListener((MainActivity) requireActivity());
+        fab.setOnClickListener(clickedView->{
+            JournalViewModel viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
+            viewModel.postNewJournal();
+            ((MainActivity)requireActivity()).onClick(clickedView);
+        });
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,14 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.recyclerview.JournalListAdapter;
+import com.coulter.thoughtfuljournal.recyclerview.JournalListClickListener;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
 
 
-public class RecyclerViewFragment extends Fragment {
+public class RecyclerViewFragment extends Fragment implements JournalListClickListener {
     private RecyclerView recyclerView;
+    private JournalListAdapter adapter;
 
     public RecyclerViewFragment(){}
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,9 +37,14 @@ public class RecyclerViewFragment extends Fragment {
                 .get(JournalViewModel.class)
                 .getJournals()
                 .observe(requireActivity(), journals -> {
-                    recyclerView.setAdapter(
-                        new JournalListAdapter(journals)
-                    );
+                    adapter = new JournalListAdapter(journals);
+                    adapter.setOnClickListener(this);
+                    recyclerView.setAdapter(adapter);
                 });
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(requireActivity(), adapter.getJournal(position).toString(), Toast.LENGTH_SHORT).show();
     }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 public class JournalRepository {
     private final JournalDAO dao;
     private final LiveData<List<Journal>> journals;
+    private static final String DEFAULT_NAME = "New Journal";
 
     public JournalRepository(Application application) {
         dao = JournalDatabase.getInstance(application).getJournalDao();
@@ -36,6 +37,6 @@ public class JournalRepository {
     }
 
     public MutableLiveData<Journal> getNewJournal(){
-        return new MutableLiveData<>(new Journal("","",Calendar.getInstance().getTime()));
+        return new MutableLiveData<>(new Journal(DEFAULT_NAME,"",Calendar.getInstance().getTime()));
     }
 }
