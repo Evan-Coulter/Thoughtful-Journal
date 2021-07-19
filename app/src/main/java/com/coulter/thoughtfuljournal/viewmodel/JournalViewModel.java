@@ -41,4 +41,7 @@ public class JournalViewModel extends AndroidViewModel {
     public void postNewJournal() {
         currentJournal = repository.getNewJournal();
     }
+    public void postOldJournal(Journal journal) {
+        currentJournal = repository.getOldJournal(journal);
+    }
 }

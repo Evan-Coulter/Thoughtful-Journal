@@ -11,9 +11,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.coulter.thoughtfuljournal.MainActivity;
 import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.recyclerview.JournalListAdapter;
 import com.coulter.thoughtfuljournal.recyclerview.JournalListClickListener;
+import com.coulter.thoughtfuljournal.room.Journal;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
 
 
@@ -45,6 +47,9 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(requireActivity(), adapter.getJournal(position).toString(), Toast.LENGTH_SHORT).show();
+        Journal clickedJournal = adapter.getJournal(position);
+        JournalViewModel viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
+        viewModel.postOldJournal(clickedJournal);
+        ((MainActivity)requireActivity()).onClick(null);
     }
 }

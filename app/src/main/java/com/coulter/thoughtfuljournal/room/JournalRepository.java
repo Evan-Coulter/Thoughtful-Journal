@@ -36,7 +36,19 @@ public class JournalRepository {
         return dao.search(journalName);
     }
 
+
     public MutableLiveData<Journal> getNewJournal(){
         return new MutableLiveData<>(new Journal(DEFAULT_NAME,"",Calendar.getInstance().getTime()));
+    }
+    public MutableLiveData<Journal> getOldJournal(Journal journal) {
+        MutableLiveData<Journal> newJournal = getNewJournal();
+        LiveData<Journal> previousJournal = dao.get(journal.primaryKey);
+        previousJournal.observeForever(journal1 -> {
+            Journal returnedJournal = newJournal.getValue();
+            returnedJournal.primaryKey = journal1.primaryKey;
+            returnedJournal.journal_content = journal1.journal_content;
+            returnedJournal.creation_date = journal1.creation_date;
+        });
+        return newJournal;
     }
 }
