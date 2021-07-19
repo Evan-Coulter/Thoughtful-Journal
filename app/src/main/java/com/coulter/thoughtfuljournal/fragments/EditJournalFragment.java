@@ -28,6 +28,7 @@ public class EditJournalFragment extends Fragment {
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         EditJournalFragmentBinding binding = DataBindingUtil.inflate(inflater,R.layout.edit_journal_fragment,container,false);
+        viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
         binding.setViewmodel(viewModel);
         return binding.getRoot();
     }
