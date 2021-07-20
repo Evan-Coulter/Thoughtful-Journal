@@ -15,4 +15,5 @@
     <string name="save_button">Save</string>
     <string name="sort_button">Sort</string>
     <string name="search_button">Search</string>
+    <string name="journal_title_hint">Journal Title</string>
 </resources>
