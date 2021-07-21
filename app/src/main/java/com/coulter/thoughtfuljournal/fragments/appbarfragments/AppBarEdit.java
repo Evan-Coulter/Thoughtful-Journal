@@ -7,22 +7,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.coulter.thoughtfuljournal.MainActivity;
 import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.databinding.AppBarFragmentBinding;
+import com.coulter.thoughtfuljournal.fragments.SaveDialogFragment;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
 public class AppBarEdit extends AppBarFragment {
+    private JournalViewModel viewModel;
+
     @Override
     protected boolean handleOnOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.saveButton) {
-            JournalViewModel viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
+            viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
             viewModel.insert(viewModel.currentJournal.getValue());
-            ((MainActivity) requireActivity()).onClick(null);
+            SaveDialogFragment dialog = new SaveDialogFragment();
+            dialog.show(requireActivity().getSupportFragmentManager(), "Save Dialog");
             return true;
         }
         return super.onOptionsItemSelected(item);

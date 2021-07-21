@@ -16,4 +16,6 @@
     <string name="sort_button">Sort</string>
     <string name="search_button">Search</string>
     <string name="journal_title_hint">Journal Title</string>
+    <string name="save_as_draft">Save as draft?</string>
+    <string name="new_journal_title">New Journal</string>
 </resources>
