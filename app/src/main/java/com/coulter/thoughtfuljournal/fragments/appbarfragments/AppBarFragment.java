@@ -37,8 +37,7 @@ public abstract class AppBarFragment extends Fragment {
 
     private void setupAppBar(View view) {
         Toolbar toolbar = view.findViewById(R.id.app_bar);
-        AppCompatActivity activity = (AppCompatActivity)requireActivity();
-        activity.setSupportActionBar(toolbar);
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
     }
 
     @Override

@@ -23,9 +23,7 @@ public class JournalRepository {
     }
 
     public void insert(Journal journal) {
-        JournalDatabase.writer.execute(()->{
-            dao.insert(journal);
-        });
+        JournalDatabase.writer.execute(()-> dao.insert(journal));
     }
 
     public void delete(String journalName) {
@@ -43,11 +41,14 @@ public class JournalRepository {
     public MutableLiveData<Journal> getOldJournal(Journal journal) {
         MutableLiveData<Journal> newJournal = getNewJournal();
         LiveData<Journal> previousJournal = dao.get(journal.primaryKey);
-        previousJournal.observeForever(journal1 -> {
+        previousJournal.observeForever(observedJournal -> {
             Journal returnedJournal = newJournal.getValue();
-            returnedJournal.primaryKey = journal1.primaryKey;
-            returnedJournal.journal_content = journal1.journal_content;
-            returnedJournal.creation_date = journal1.creation_date;
+            if(returnedJournal != null) {
+                returnedJournal.primaryKey = observedJournal.primaryKey;
+                returnedJournal.journal_name = observedJournal.journal_name;
+                returnedJournal.journal_content = observedJournal.journal_content;
+                returnedJournal.creation_date = observedJournal.creation_date;
+            }
         });
         return newJournal;
     }

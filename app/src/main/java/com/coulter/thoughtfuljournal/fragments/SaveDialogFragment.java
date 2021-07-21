@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.coulter.thoughtfuljournal.MainActivity;
 import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.databinding.SaveDialogFragmentBinding;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
@@ -43,6 +44,9 @@ public class SaveDialogFragment extends DialogFragment {
         return v -> {
             JournalViewModel viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
             viewModel.insert(viewModel.currentJournal.getValue());
+            //Refresh current layout.
+            ((MainActivity)requireActivity()).onClick(null);
+            ((MainActivity)requireActivity()).onClick(null);
             dismiss();
         };
     }
