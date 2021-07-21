@@ -1,6 +1,5 @@
 package com.coulter.thoughtfuljournal.recyclerview;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 
 public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHolder> {
@@ -33,17 +33,24 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHold
         return new JournalListViewHolder(view);
     }
 
-    @SuppressLint("SimpleDateFormat")
     @Override
     public void onBindViewHolder(JournalListViewHolder holder, int position) {
-        holder.getTitle().setText(journals.get(position).journal_name);
-        holder.getDate().setText(
-            new SimpleDateFormat("dd/MM/yyyy")
-            .format(journals.get(position)
-            .creation_date)
-        );
-        holder.getJournal().setText(journals.get(position).journal_content);
+        Journal currentJournal = journals.get(position);
+        holder.getTitle().setText(currentJournal.journal_name);
+        setDate(holder, currentJournal);
+        holder.getJournal().setText(currentJournal.journal_content);
         holder.setOnClickListener(clickListener);
+    }
+
+    private void setDate(JournalListViewHolder holder, Journal currentJournal) {
+        if(!currentJournal.isDraft) {
+            holder.getDate().setText(
+                new SimpleDateFormat("dd/MM/yyyy", Locale.US)
+                .format(currentJournal.creation_date)
+            );
+        }else{
+            holder.getDate().setText(R.string.draft_text);
+        }
     }
 
     @Override

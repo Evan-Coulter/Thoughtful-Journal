@@ -17,5 +17,6 @@
     <string name="search_button">Search</string>
     <string name="journal_title_hint">Journal Title</string>
     <string name="save_as_draft">Save as draft?</string>
+    <string name="draft_text">DRAFT</string>
     <string name="new_journal_title">New Journal</string>
 </resources>
