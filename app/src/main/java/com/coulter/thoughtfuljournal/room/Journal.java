@@ -29,10 +29,10 @@ public class Journal {
     @ColumnInfo(name="is_draft")
     public Boolean isDraft;
 
-    public Journal(@NonNull String journal_name, @NonNull String journal_content, Date creation_date) {
+    public Journal(@NonNull String journal_name, @NonNull String journal_content, Date creation_date, Boolean isDraft) {
         this.journal_name = journal_name;
         this.journal_content = journal_content;
-        this.isDraft = true;
+        this.isDraft = isDraft;
         if(creation_date == null) {
             this.creation_date = Calendar.getInstance().getTime();
         } else{
