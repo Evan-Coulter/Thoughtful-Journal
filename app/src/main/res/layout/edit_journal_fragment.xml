@@ -7,28 +7,43 @@
             name="viewmodel"
             type="com.coulter.thoughtfuljournal.viewmodel.JournalViewModel" />
     </data>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/editText"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:gravity="start|top"
-            android:importantForAutofill="no"
-            android:inputType="textMultiLine"
-            android:text="@={viewmodel.currentJournal.journal_content}"
-            tools:ignore="LabelFor" />
+            android:layout_height="match_parent"
+            android:layout_above="@+id/Footer"
+            android:clipToPadding="false"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:gravity="top|start"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:text="@={viewmodel.currentJournal.journal_content}"
+                    tools:ignore="LabelFor" />
+            </LinearLayout>
+        </ScrollView>
 
         <LinearLayout
+            android:id="@+id/Footer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true">
 
             <ImageButton
                 android:id="@+id/boldButton"
@@ -62,5 +77,5 @@
                 android:contentDescription="@string/size_button_description"
                 app:srcCompat="@drawable/size_icon" />
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </layout>
