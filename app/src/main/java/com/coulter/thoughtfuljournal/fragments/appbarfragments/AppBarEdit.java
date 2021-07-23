@@ -21,8 +21,6 @@ public class AppBarEdit extends AppBarFragment {
     @Override
     protected boolean handleOnOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.saveButton) {
-            JournalViewModel viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
-            viewModel.insert(viewModel.currentJournal.getValue());
             SaveDialogFragment dialog = new SaveDialogFragment();
             dialog.show(requireActivity().getSupportFragmentManager(), "Save Dialog");
             return true;
