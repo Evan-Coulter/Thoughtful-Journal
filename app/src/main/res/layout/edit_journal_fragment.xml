@@ -14,7 +14,6 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/Footer"
             android:clipToPadding="false"
             android:fillViewport="true">
 
@@ -42,40 +41,51 @@
             android:id="@+id/Footer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:gravity="end"
+            android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/boldButton"
+            <com.google.android.material.button.MaterialButtonToggleGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/bold_button_description"
-                app:srcCompat="@drawable/bold_icon" />
+                android:layout_margin="24dp">
 
-            <ImageButton
-                android:id="@+id/italicButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/italic_button_description"
-                app:srcCompat="@drawable/italic_icon" />
+                <Button
+                    android:id="@+id/boldButton"
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/bold_button_description"
+                    app:icon="@drawable/bold_icon" />
 
-            <ImageButton
-                android:id="@+id/underlineButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/underline_button_description"
-                app:srcCompat="@drawable/underline_icon" />
+                <Button
+                    android:id="@+id/italicButton"
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/italic_button_description"
+                    app:icon="@drawable/italic_icon" />
 
-            <ImageButton
-                android:id="@+id/sizeButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/size_button_description"
-                app:srcCompat="@drawable/size_icon" />
+                <Button
+                    android:id="@+id/underlineButton"
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/underline_button_description"
+                    app:icon="@drawable/underline_icon" />
+
+                <Button
+                    android:id="@+id/sizeButton"
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/size_button_description"
+                    app:icon="@drawable/size_icon" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
         </LinearLayout>
     </RelativeLayout>
 </layout>
