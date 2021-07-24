@@ -49,9 +49,10 @@
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="24dp">
+                android:layout_margin="24dp"
+                android:id="@+id/toggleGroup">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/boldButton"
                     style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                     android:layout_width="wrap_content"
@@ -60,7 +61,7 @@
                     android:contentDescription="@string/bold_button_description"
                     app:icon="@drawable/bold_icon" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/italicButton"
                     style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                     android:layout_width="wrap_content"
@@ -69,7 +70,7 @@
                     android:contentDescription="@string/italic_button_description"
                     app:icon="@drawable/italic_icon" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/underlineButton"
                     style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                     android:layout_width="wrap_content"
@@ -78,7 +79,7 @@
                     android:contentDescription="@string/underline_button_description"
                     app:icon="@drawable/underline_icon" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/sizeButton"
                     style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                     android:layout_width="wrap_content"

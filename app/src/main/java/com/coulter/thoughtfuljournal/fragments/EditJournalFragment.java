@@ -20,8 +20,13 @@ import androidx.lifecycle.ViewModelProvider;
 import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.databinding.EditJournalFragmentBinding;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.button.MaterialButtonToggleGroup;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditJournalFragment extends Fragment {
     public JournalViewModel viewModel;
@@ -39,27 +44,39 @@ public class EditJournalFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater,R.layout.edit_journal_fragment,container,false);
         viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
         binding.setViewmodel(viewModel);
-        setupButtons(binding);
+        setupButtons();
         return binding.getRoot();
     }
 
-    private void setupButtons(EditJournalFragmentBinding binding) {
-        setupFormatButton(new StyleSpan(Typeface.BOLD), binding.boldButton, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        setupFormatButton(new StyleSpan(Typeface.ITALIC), binding.italicButton, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        setupFormatButton(new UnderlineSpan(), binding.underlineButton, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        setupFormatButton(new AbsoluteSizeSpan(22, true), binding.sizeButton, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+    private void setupButtons() {
+        setupFormatButton(new StyleSpan(Typeface.BOLD), binding.boldButton);
+        setupFormatButton(new StyleSpan(Typeface.ITALIC), binding.italicButton);
+        setupFormatButton(new UnderlineSpan(), binding.underlineButton);
+        setupFormatButton(new AbsoluteSizeSpan(22, true), binding.sizeButton);
     }
 
-    private void setupFormatButton(ParcelableSpan span, Button button, int spanBounds) {
-        button.setOnClickListener(view->{
-            int selectionIndex = binding.editText.getSelectionEnd();
-            Spannable string = new SpannableStringBuilder(binding.editText.getText());
-            string.setSpan(span,
-                    binding.editText.getSelectionStart(),
-                    binding.editText.getSelectionEnd(),
-                    spanBounds);
-            binding.editText.setText(string);
-            binding.editText.setSelection(selectionIndex);
+    private void setupFormatButton(ParcelableSpan span, Button button) {
+        button.setOnClickListener(view-> {
+            //if there is text selected
+            if (binding.editText.getSelectionStart() - binding.editText.getSelectionEnd() != 0) {
+                //only apply formatting
+                applyFormatting(span, button, binding.editText.getSelectionStart(), binding.editText.getSelectionEnd());
+            } else {
+                displayError();
+            }
         });
+    }
+
+    private void applyFormatting(ParcelableSpan span, Button button, int start, int end){
+        int selectionIndex = binding.editText.getSelectionEnd();
+        Spannable string = new SpannableStringBuilder(binding.editText.getText());
+        string.setSpan(span, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        binding.editText.setText(string);
+        binding.editText.setSelection(selectionIndex);
+        ((MaterialButton)button).setChecked(false);
+    }
+
+    private void displayError() {
+        //show snack bar error telling user to highlight text first.
     }
 }
