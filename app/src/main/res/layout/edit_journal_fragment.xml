@@ -28,11 +28,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:ems="10"
                     android:gravity="top|start"
                     android:importantForAutofill="no"
-                    android:inputType="textMultiLine"
+                    android:inputType="textMultiLine|textNoSuggestions"
                     android:text="@={viewmodel.currentJournal.journal_content}"
+                    android:textSize="14sp"
+                    android:background="#FFFFFF"
                     tools:ignore="LabelFor" />
             </LinearLayout>
         </ScrollView>
