@@ -1,5 +1,6 @@
 package com.coulter.thoughtfuljournal.recyclerview;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHold
         Journal currentJournal = journals.get(position);
         holder.getTitle().setText(currentJournal.journal_name);
         setDate(holder, currentJournal);
-        holder.getJournal().setText(currentJournal.journal_content);
+        holder.getJournal().setText(Html.fromHtml(currentJournal.journal_content));
         holder.setOnClickListener(clickListener);
     }
 

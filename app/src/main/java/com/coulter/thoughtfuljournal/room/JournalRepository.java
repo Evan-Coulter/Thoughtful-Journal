@@ -39,18 +39,13 @@ public class JournalRepository {
         return new MutableLiveData<>(new Journal(DEFAULT_NAME,"",Calendar.getInstance().getTime(), true));
     }
     public MutableLiveData<Journal> getOldJournal(Journal journal) {
-        MutableLiveData<Journal> newJournal = getNewJournal();
-        LiveData<Journal> previousJournal = dao.get(journal.primaryKey);
-        previousJournal.observeForever(observedJournal -> {
-            Journal returnedJournal = newJournal.getValue();
-            if(returnedJournal != null) {
-                returnedJournal.primaryKey = observedJournal.primaryKey;
-                returnedJournal.journal_name = observedJournal.journal_name;
-                returnedJournal.journal_content = observedJournal.journal_content;
-                returnedJournal.creation_date = observedJournal.creation_date;
-                returnedJournal.isDraft = observedJournal.isDraft;
-            }
-        });
-        return newJournal;
+        MutableLiveData<Journal> liveData = getNewJournal();
+        Journal newJournal = new Journal(journal.journal_name,
+                journal.journal_content,
+                journal.creation_date,
+                journal.isDraft);
+        newJournal.primaryKey = journal.primaryKey;
+        liveData.setValue(newJournal);
+        return liveData;
     }
 }

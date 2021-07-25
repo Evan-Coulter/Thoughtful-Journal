@@ -2,10 +2,10 @@ package com.coulter.thoughtfuljournal.fragments;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.ParcelableSpan;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.style.AbsoluteSizeSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.databinding.EditJournalFragmentBinding;
+import com.coulter.thoughtfuljournal.room.Journal;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -41,15 +42,22 @@ public class EditJournalFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater,R.layout.edit_journal_fragment,container,false);
         viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
         binding.setViewmodel(viewModel);
+        setupEditText();
         setupButtons();
         return binding.getRoot();
+    }
+
+    private void setupEditText() {
+        Journal journal = viewModel.currentJournal.getValue();
+        if(journal != null){
+            binding.editText.setText(Html.fromHtml(journal.journal_content));
+        }
     }
 
     private void setupButtons() {
         setupFormatButton(new StyleSpan(Typeface.BOLD), binding.boldButton);
         setupFormatButton(new StyleSpan(Typeface.ITALIC), binding.italicButton);
         setupFormatButton(new UnderlineSpan(), binding.underlineButton);
-        setupFormatButton(new AbsoluteSizeSpan(22, true), binding.sizeButton);
     }
 
     private void setupFormatButton(ParcelableSpan span, MaterialButton button) {

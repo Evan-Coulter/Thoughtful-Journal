@@ -1,9 +1,11 @@
 package com.coulter.thoughtfuljournal.fragments;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,18 +33,19 @@ public class SaveDialogFragment extends DialogFragment {
         return binding.getRoot();
     }
 
-    //Override this.
+    //Override this to add callback.
     public View.OnClickListener getCancelButtonListener(SaveDialogFragmentBinding binding) {
         return v -> dismiss();
     }
 
-    //Override this.
+    //Override this to add callback.
     public View.OnClickListener getSaveButtonListener(SaveDialogFragmentBinding binding) {
         if(Objects.requireNonNull(binding.textField.getEditText()).getText().toString().equals("")){
             binding.textField.getEditText().setText(R.string.new_journal_title);
         }
         return v -> {
             JournalViewModel viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
+            Objects.requireNonNull(viewModel.currentJournal.getValue()).journal_content = Html.toHtml(((EditText)requireActivity().findViewById(R.id.editText)).getText());
             viewModel.insert(viewModel.currentJournal.getValue());
             //Refresh current layout.
             ((MainActivity)requireActivity()).onClick(null);
