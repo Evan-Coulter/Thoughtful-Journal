@@ -3,7 +3,6 @@ package com.coulter.thoughtfuljournal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 
 import android.os.Bundle;
@@ -12,8 +11,6 @@ import android.view.View;
 import com.coulter.thoughtfuljournal.fragments.appbarfragments.AppBarEdit;
 import com.coulter.thoughtfuljournal.fragments.FABFragment;
 import com.coulter.thoughtfuljournal.fragments.appbarfragments.AppBarMain;
-
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private int currentDestination = R.id.editToList;
@@ -42,21 +39,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 findViewById(R.id.fab_container_main).setVisibility(View.GONE);
                 setupFragment(R.id.app_bar_container_main, new AppBarEdit());
                 currentDestination = R.id.editToList;
+                navController.popBackStack();
             } else {
-                findViewById(R.id.fab_container_main).setVisibility(View.VISIBLE);
-                setupFragment(R.id.app_bar_container_main, new AppBarMain());
+                //findViewById(R.id.fab_container_main).setVisibility(View.VISIBLE);
+                //setupFragment(R.id.app_bar_container_main, new AppBarMain());
                 currentDestination = R.id.listToEdit;
+                navController.navigate(currentDestination);
             }
         });
-        navController.navigate(currentDestination);
-    }
-
-    @Override
-    public void onBackPressed() {
-        NavDestination destination =  Objects.requireNonNull(
-                Navigation.findNavController(findViewById(R.id.content_container_main))
-        ).getCurrentDestination();
-        if(Objects.requireNonNull(destination).getId() == R.id.editToList) {return;}
-        super.onBackPressed();
     }
 }
