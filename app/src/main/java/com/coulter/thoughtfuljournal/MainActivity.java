@@ -39,13 +39,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 findViewById(R.id.fab_container_main).setVisibility(View.GONE);
                 setupFragment(R.id.app_bar_container_main, new AppBarEdit());
                 currentDestination = R.id.editToList;
-                navController.popBackStack();
             } else {
-                //findViewById(R.id.fab_container_main).setVisibility(View.VISIBLE);
-                //setupFragment(R.id.app_bar_container_main, new AppBarMain());
+                findViewById(R.id.fab_container_main).setVisibility(View.VISIBLE);
+                setupFragment(R.id.app_bar_container_main, new AppBarMain());
                 currentDestination = R.id.listToEdit;
-                navController.navigate(currentDestination);
             }
         });
+        if(currentDestination == R.id.listToEdit){
+            navController.navigate(currentDestination);
+        } else {
+            navController.popBackStack();
+        }
     }
 }
