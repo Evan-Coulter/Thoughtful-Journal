@@ -30,8 +30,8 @@ public class JournalViewModel extends AndroidViewModel {
         repository.insert(journal);
     }
 
-    public void delete(String journalName) {
-        repository.delete(journalName);
+    public void delete(Journal joural) {
+        repository.delete(joural);
     }
 
     public List<Journal> search(String journalName) {
@@ -41,6 +41,7 @@ public class JournalViewModel extends AndroidViewModel {
     public void postNewJournal() {
         currentJournal = repository.getNewJournal();
     }
+
     public void postOldJournal(Journal journal) {
         currentJournal = repository.getOldJournal(journal);
     }

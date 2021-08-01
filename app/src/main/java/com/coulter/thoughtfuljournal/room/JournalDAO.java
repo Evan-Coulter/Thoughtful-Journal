@@ -2,6 +2,7 @@ package com.coulter.thoughtfuljournal.room;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -20,8 +21,8 @@ public interface JournalDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Journal journal);
 
-    @Query("DELETE FROM journal_table WHERE journal_name = :journalName ")
-    void delete(String journalName);
+    @Delete
+    void delete(Journal journal);
 
     @Query("SELECT * FROM journal_table WHERE primaryKey = :id")
     LiveData<Journal> get(int id);

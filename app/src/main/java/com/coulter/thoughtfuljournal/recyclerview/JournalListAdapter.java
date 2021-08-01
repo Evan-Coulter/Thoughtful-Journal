@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.coulter.thoughtfuljournal.R;
+import com.coulter.thoughtfuljournal.fragments.RecyclerViewFragment;
 import com.coulter.thoughtfuljournal.room.Journal;
 
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +21,7 @@ import java.util.Locale;
 public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHolder> {
     private final List<Journal> journals;
     private JournalListClickListener clickListener;
+    private MoreButtonClickListener moreButtonClickListener;
 
     public JournalListAdapter(List<Journal> journals) {
         this.journals = journals;
@@ -41,6 +43,7 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHold
         setDate(holder, currentJournal);
         holder.getJournal().setText(Html.fromHtml(currentJournal.journal_content));
         holder.setOnClickListener(clickListener);
+        holder.setOnMoreButtonClickListener(moreButtonClickListener);
     }
 
     private void setDate(JournalListViewHolder holder, Journal currentJournal) {
@@ -59,11 +62,15 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHold
         return journals.size();
     }
 
-    public Journal getJournal(int position){
+    public Journal getJournal(int position) {
         return journals.get(position);
     }
 
-    public void setOnClickListener(JournalListClickListener listener){
+    public void setOnClickListener(JournalListClickListener listener) {
         clickListener = listener;
+    }
+
+    public void setOnMoreButtonClickListener(MoreButtonClickListener listener) {
+        moreButtonClickListener = listener;
     }
 }

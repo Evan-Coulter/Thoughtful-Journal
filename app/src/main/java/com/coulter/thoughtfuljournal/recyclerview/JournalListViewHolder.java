@@ -1,13 +1,17 @@
 package com.coulter.thoughtfuljournal.recyclerview;
 
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.coulter.thoughtfuljournal.R;
 
 public class JournalListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private final View layout;
     private final TextView title;
     private final TextView date;
     private final TextView journal;
@@ -15,10 +19,11 @@ public class JournalListViewHolder extends RecyclerView.ViewHolder implements Vi
 
     public JournalListViewHolder(View view) {
         super(view);
-        view.setOnClickListener(this);
-        title = view.findViewById(R.id.card_title);
-        date = view.findViewById(R.id.card_date);
-        journal = view.findViewById(R.id.journal_text);
+        layout = view;
+        layout.setOnClickListener(this);
+        title = layout.findViewById(R.id.card_title);
+        date = layout.findViewById(R.id.card_date);
+        journal = layout.findViewById(R.id.journal_text);
     }
 
     public TextView getTitle() {
@@ -40,5 +45,12 @@ public class JournalListViewHolder extends RecyclerView.ViewHolder implements Vi
     @Override
     public void onClick(View v) {
         listener.onItemClick(v, getBindingAdapterPosition());
+    }
+
+    public void setOnMoreButtonClickListener(MoreButtonClickListener listener) {
+        ImageView moreButton = layout.findViewById(R.id.moreButton);
+        moreButton.setOnClickListener(view -> {
+            listener.onMoreButtonClicked(moreButton, getBindingAdapterPosition());
+        });
     }
 }
