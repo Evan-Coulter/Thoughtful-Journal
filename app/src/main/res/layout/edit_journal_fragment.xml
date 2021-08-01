@@ -27,7 +27,6 @@
                     android:id="@+id/editText"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="100dp"
                     android:layout_weight="1"
                     android:background="#FFFFFF"
@@ -35,6 +34,7 @@
                     android:gravity="top|start"
                     android:importantForAutofill="no"
                     android:inputType="textMultiLine"
+                    android:paddingTop="8dp"
                     android:textSize="16sp"
                     tools:ignore="LabelFor" />
             </LinearLayout>

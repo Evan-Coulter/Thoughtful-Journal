@@ -1,6 +1,7 @@
 package com.coulter.thoughtfuljournal.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +19,12 @@ import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.recyclerview.JournalListAdapter;
 import com.coulter.thoughtfuljournal.recyclerview.JournalListClickListener;
 import com.coulter.thoughtfuljournal.recyclerview.MoreButtonClickListener;
+import com.coulter.thoughtfuljournal.recyclerview.ResourceProvider;
 import com.coulter.thoughtfuljournal.room.Journal;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
 
 
-public class RecyclerViewFragment extends Fragment implements JournalListClickListener, MoreButtonClickListener {
+public class RecyclerViewFragment extends Fragment implements JournalListClickListener, MoreButtonClickListener, ResourceProvider {
     private RecyclerView recyclerView;
     private JournalListAdapter adapter;
 
@@ -46,6 +48,7 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
                     adapter = new JournalListAdapter(journals);
                     adapter.setOnClickListener(this);
                     adapter.setOnMoreButtonClickListener(this);
+                    adapter.setResourceProvider(this);
                     recyclerView.setAdapter(adapter);
                 });
     }
@@ -80,5 +83,10 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
         });
         popup.inflate(R.menu.more_popup_menu);
         popup.show();
+    }
+
+    @Override
+    public Context getResourceProvider() {
+        return requireActivity();
     }
 }

@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
 import com.coulter.thoughtfuljournal.fragments.appbarfragments.AppBarEdit;
 import com.coulter.thoughtfuljournal.fragments.FABFragment;
 import com.coulter.thoughtfuljournal.fragments.appbarfragments.AppBarMain;
+import com.coulter.thoughtfuljournal.recyclerview.ResourceProvider;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private int currentDestination = R.id.editToList;

@@ -1,13 +1,16 @@
 package com.coulter.thoughtfuljournal.recyclerview;
 
+import android.content.Context;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.coulter.thoughtfuljournal.R;
+import com.coulter.thoughtfuljournal.fragments.RecyclerViewFragment;
 import com.coulter.thoughtfuljournal.room.Journal;
 import com.google.android.material.card.MaterialCardView;
 
@@ -22,6 +25,7 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHold
     private final List<Journal> journals;
     private JournalListClickListener clickListener;
     private MoreButtonClickListener moreButtonClickListener;
+    private ResourceProvider resourceProvider;
 
     public JournalListAdapter(List<Journal> journals) {
         this.journals = journals;
@@ -46,6 +50,8 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHold
         holder.setOnMoreButtonClickListener(moreButtonClickListener);
         if(currentJournal.isDraft) {
             holder.setBackground(0xFFC7FFFF);
+            holder.setDateColor(0xFF4BA3C7);
+            holder.setTypeFace(ResourcesCompat.getFont(resourceProvider.getResourceProvider(), R.font.robotobold));
         }
     }
 
@@ -75,5 +81,9 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHold
 
     public void setOnMoreButtonClickListener(MoreButtonClickListener listener) {
         moreButtonClickListener = listener;
+    }
+
+    public void setResourceProvider(ResourceProvider resourceProvider) {
+        this.resourceProvider = resourceProvider;
     }
 }
