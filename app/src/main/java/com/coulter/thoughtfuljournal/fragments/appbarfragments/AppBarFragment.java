@@ -1,5 +1,8 @@
 package com.coulter.thoughtfuljournal.fragments.appbarfragments;
 
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +14,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.coulter.thoughtfuljournal.R;
@@ -44,7 +48,18 @@ public abstract class AppBarFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(getMenuID(), menu);
+        setIconColor(menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    private void setIconColor(Menu menu) {
+        for(int i=0; i<menu.size(); i++) {
+            Drawable drawable = menu.getItem(i).getIcon();
+            if(drawable!=null) {
+                drawable.mutate();
+                drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(requireActivity(), R.color.black), PorterDuff.Mode.SRC_ATOP));
+            }
+        }
     }
 
     @Override
