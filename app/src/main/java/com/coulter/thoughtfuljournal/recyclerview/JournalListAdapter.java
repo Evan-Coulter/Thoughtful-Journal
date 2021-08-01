@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.room.Journal;
+import com.google.android.material.card.MaterialCardView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,7 +45,7 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHold
         holder.setOnClickListener(clickListener);
         holder.setOnMoreButtonClickListener(moreButtonClickListener);
         if(currentJournal.isDraft) {
-            holder.setBackground(R.color.colorSecondaryLight);
+            holder.setBackground(0xFFC7FFFF);
         }
     }
 

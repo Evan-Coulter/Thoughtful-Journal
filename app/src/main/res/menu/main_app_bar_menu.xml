@@ -6,10 +6,11 @@
         android:id="@+id/sortButton"
         android:icon="@drawable/sort_icon"
         android:title="@string/sort_button"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/searchButton"
         android:icon="@drawable/search_icon"
         android:title="@string/search_button"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+        />
 </menu>

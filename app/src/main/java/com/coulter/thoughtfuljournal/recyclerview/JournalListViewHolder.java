@@ -1,5 +1,6 @@
 package com.coulter.thoughtfuljournal.recyclerview;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,7 +52,7 @@ public class JournalListViewHolder extends RecyclerView.ViewHolder implements Vi
         moreButton.setOnClickListener(view -> listener.onMoreButtonClicked(moreButton, getBindingAdapterPosition()));
     }
 
-    public void setBackground(int colorID) {
-        ((MaterialCardView)layout).setCardBackgroundColor(colorID);
+    public void setBackground(int color) {
+        ((MaterialCardView)layout).setCardBackgroundColor(color);
     }
 }

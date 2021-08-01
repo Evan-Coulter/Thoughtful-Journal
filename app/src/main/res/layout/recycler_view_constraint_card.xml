@@ -3,12 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:layout_margin="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
     android:clickable="true"
     android:focusable="true"
     app:cardBackgroundColor="@color/colorPrimaryLight"
     app:cardCornerRadius="16dp"
-    app:cardElevation="3dp">
+    app:cardElevation="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,6 +26,7 @@
             android:gravity="start|top"
             android:maxLines="2"
             android:text="@string/sample_title"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/card_date"
             app:layout_constraintEnd_toStartOf="@+id/card_date"
@@ -37,7 +41,8 @@
             android:contentDescription="@string/more_button_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/more_icon" />
+            app:srcCompat="@drawable/more_icon"
+            app:tint="@color/black" />
 
         <TextView
             android:id="@+id/card_date"
@@ -45,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="@string/sample_date"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/moreButton"
             app:layout_constraintEnd_toStartOf="@+id/moreButton"
             app:layout_constraintTop_toTopOf="@+id/moreButton" />
@@ -57,6 +63,7 @@
             android:layout_marginBottom="24dp"
             android:gravity="start|top"
             android:text="@string/sample_journal_text"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/moreButton"
             app:layout_constraintStart_toStartOf="@+id/card_title"

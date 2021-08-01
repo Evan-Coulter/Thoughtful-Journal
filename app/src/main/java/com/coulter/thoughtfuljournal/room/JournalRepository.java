@@ -36,7 +36,7 @@ public class JournalRepository {
 
 
     public MutableLiveData<Journal> getNewJournal() {
-        return new MutableLiveData<>(new Journal(DEFAULT_NAME, "", Calendar.getInstance().getTime(), true));
+        return new MutableLiveData<>(new Journal(DEFAULT_NAME, "", Calendar.getInstance().getTime(), false));
     }
     public MutableLiveData<Journal> getOldJournal(Journal journal) {
         MutableLiveData<Journal> liveData = getNewJournal();

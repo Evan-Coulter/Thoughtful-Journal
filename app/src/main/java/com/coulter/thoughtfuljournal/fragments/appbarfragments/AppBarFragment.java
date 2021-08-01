@@ -37,6 +37,7 @@ public abstract class AppBarFragment extends Fragment {
 
     private void setupAppBar(View view) {
         Toolbar toolbar = view.findViewById(R.id.app_bar);
+        toolbar.setTitleTextAppearance(requireActivity(), R.style.Widget_ThoughtfulJournal_Toolbar);
         ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
     }
 
