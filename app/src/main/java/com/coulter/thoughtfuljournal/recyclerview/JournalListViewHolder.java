@@ -1,14 +1,13 @@
 package com.coulter.thoughtfuljournal.recyclerview;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.coulter.thoughtfuljournal.R;
+import com.google.android.material.card.MaterialCardView;
 
 public class JournalListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private final View layout;
@@ -49,8 +48,10 @@ public class JournalListViewHolder extends RecyclerView.ViewHolder implements Vi
 
     public void setOnMoreButtonClickListener(MoreButtonClickListener listener) {
         ImageView moreButton = layout.findViewById(R.id.moreButton);
-        moreButton.setOnClickListener(view -> {
-            listener.onMoreButtonClicked(moreButton, getBindingAdapterPosition());
-        });
+        moreButton.setOnClickListener(view -> listener.onMoreButtonClicked(moreButton, getBindingAdapterPosition()));
+    }
+
+    public void setBackground(int colorID) {
+        ((MaterialCardView)layout).setCardBackgroundColor(colorID);
     }
 }

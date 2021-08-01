@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.coulter.thoughtfuljournal.R;
-import com.coulter.thoughtfuljournal.fragments.RecyclerViewFragment;
 import com.coulter.thoughtfuljournal.room.Journal;
 
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +31,7 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHold
     public JournalListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.recycler_view_fragment_card, parent, false);
+                .inflate(R.layout.recycler_view_constraint_card, parent, false);
         return new JournalListViewHolder(view);
     }
 
@@ -44,6 +43,9 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHold
         holder.getJournal().setText(Html.fromHtml(currentJournal.journal_content));
         holder.setOnClickListener(clickListener);
         holder.setOnMoreButtonClickListener(moreButtonClickListener);
+        if(currentJournal.isDraft) {
+            holder.setBackground(R.color.colorSecondaryLight);
+        }
     }
 
     private void setDate(JournalListViewHolder holder, Journal currentJournal) {

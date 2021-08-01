@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
@@ -21,11 +22,14 @@
             android:layout_marginBottom="32dp"
             android:hint="@string/journal_title_hint"
             android:maxWidth="488dp"
-            android:minWidth="88dp">
+            android:minWidth="88dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="25">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="25"
                 android:text="@={viewModel.currentJournal.journal_name}" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/robotobold"
                 android:text="@android:string/cancel"
                 tools:ignore="ButtonOrder" />
 
@@ -64,7 +69,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/save_button" />
+                android:fontFamily="@font/robotobold"
+                android:text="@string/save_button"
+                android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>
 </layout>
