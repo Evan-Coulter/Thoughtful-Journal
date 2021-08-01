@@ -23,4 +23,7 @@
     <string name="draft_text">DRAFT</string>
     <string name="new_journal_title">New Journal</string>
     <string name="format_string_error">Please highlight some text to apply formatting.</string>
+    <string name="delete">Delete</string>
+    <string name="open_editor">Open Editor</string>
+    <string name="open_reader">Open Reader</string>
 </resources>

@@ -68,10 +68,10 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
                 case R.id.deleteButton:
                     new ViewModelProvider(requireActivity()).get(JournalViewModel.class).delete(journal);
                     return true;
-                case R.id.openEditorButton:
+                case R.id.editorButton:
                     Toast.makeText(requireActivity(), "Editor", Toast.LENGTH_SHORT).show();
                     return true;
-                case R.id.openReaderButton:
+                case R.id.readerButton:
                     Toast.makeText(requireActivity(), "Reader", Toast.LENGTH_SHORT).show();
                     return true;
                 default:

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/deleteButton"
+        android:title="@string/delete" />
+    <item
+        android:id="@+id/editorButton"
+        android:title="@string/open_editor" />
+    <item
+        android:id="@+id/readerButton"
+        android:title="@string/open_reader" />
+</menu>
