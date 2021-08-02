@@ -13,13 +13,14 @@
         android:configChanges="keyboardHidden|orientation|screenSize"
         android:theme="@style/Theme.ThoughtfulJournal"
         tools:ignore="AllowBackup">
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashScreenActivity"
+            android:theme="@style/Theme.ThoughtfulJournal.SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>

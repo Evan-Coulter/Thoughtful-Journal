@@ -32,4 +32,8 @@
         <item name="android:fontFamily">@font/robotomedium</item>
         <item name="android:textSize">20sp</item>
     </style>
+    
+    <style name="Theme.ThoughtfulJournal.SplashTheme" parent="Theme.ThoughtfulJournal">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
 </resources>
