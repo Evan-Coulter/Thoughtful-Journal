@@ -41,6 +41,7 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
     private void setupRecyclerView(View view) {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        recyclerView.scheduleLayoutAnimation();
         new ViewModelProvider(requireActivity())
                 .get(JournalViewModel.class)
                 .getJournals()
