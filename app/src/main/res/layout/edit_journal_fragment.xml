@@ -65,7 +65,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:contentDescription="@string/bold_button_description"
-                    app:icon="@drawable/bold_icon" />
+                    app:icon="@drawable/bold_icon"
+                    app:iconTint="@color/colorPrimaryDark" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/italicButton"
@@ -74,7 +75,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:contentDescription="@string/italic_button_description"
-                    app:icon="@drawable/italic_icon" />
+                    app:icon="@drawable/italic_icon"
+                    app:iconTint="@color/colorPrimaryDark" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/underlineButton"
@@ -83,7 +85,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:contentDescription="@string/underline_button_description"
-                    app:icon="@drawable/underline_icon" />
+                    app:icon="@drawable/underline_icon"
+                    app:iconTint="@color/colorPrimaryDark" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/sizeButton"
@@ -92,7 +95,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:contentDescription="@string/size_button_description"
-                    app:icon="@drawable/size_icon" />
+                    app:icon="@drawable/size_icon"
+                    app:iconTint="@color/colorPrimaryDark" />
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
         </LinearLayout>
