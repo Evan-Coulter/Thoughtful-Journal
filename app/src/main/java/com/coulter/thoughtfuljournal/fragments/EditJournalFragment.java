@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.databinding.EditJournalFragmentBinding;
+import com.coulter.thoughtfuljournal.fragments.spanhandler.SpanHandler;
 import com.coulter.thoughtfuljournal.room.Journal;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
 import com.google.android.material.button.MaterialButton;
@@ -60,7 +61,6 @@ public class EditJournalFragment extends Fragment implements PopupMenu.OnMenuIte
     private void setupButtons() {
         setupFormatButton(binding.boldButton, ()-> applyFormatting(new StyleSpan(Typeface.BOLD), binding.editText.getSelectionStart(), binding.editText.getSelectionEnd()));
         setupFormatButton(binding.italicButton, ()-> applyFormatting(new StyleSpan(Typeface.ITALIC), binding.editText.getSelectionStart(), binding.editText.getSelectionEnd()));
-        setupFormatButton(binding.underlineButton, ()-> applyFormatting(new UnderlineSpan(), binding.editText.getSelectionStart(), binding.editText.getSelectionEnd()));
         binding.sizeButton.setOnClickListener(view->{
             PopupMenu popup = new PopupMenu(requireActivity(), view);
             popup.setOnMenuItemClickListener(this);
@@ -83,10 +83,7 @@ public class EditJournalFragment extends Fragment implements PopupMenu.OnMenuIte
     }
 
     private void applyFormatting(ParcelableSpan span, int start, int end){
-        Spannable string = new SpannableStringBuilder(binding.editText.getText());
-        string.setSpan(span, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        binding.editText.setText(string);
-        binding.editText.setSelection(start, end);
+        new SpanHandler(requireActivity(), binding.editText, span, start, end).start();
     }
 
     private void displayError(Button button) {
