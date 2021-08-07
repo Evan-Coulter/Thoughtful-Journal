@@ -34,7 +34,6 @@ public class JournalRepository {
         return dao.search(journalName);
     }
 
-
     public MutableLiveData<Journal> getNewJournal() {
         return new MutableLiveData<>(new Journal(DEFAULT_NAME, "", Calendar.getInstance().getTime(), false));
     }
@@ -45,6 +44,7 @@ public class JournalRepository {
                 journal.creation_date,
                 journal.isDraft);
         newJournal.primaryKey = journal.primaryKey;
+        newJournal.fontSize = journal.fontSize;
         liveData.setValue(newJournal);
         return liveData;
     }

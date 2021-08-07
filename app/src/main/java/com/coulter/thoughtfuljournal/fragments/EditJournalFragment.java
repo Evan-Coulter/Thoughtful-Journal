@@ -5,10 +5,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.ParcelableSpan;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
-import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +53,7 @@ public class EditJournalFragment extends Fragment implements PopupMenu.OnMenuIte
         Journal journal = viewModel.currentJournal.getValue();
         if(journal != null){
             binding.editText.setText(Html.fromHtml(journal.journal_content));
+            binding.editText.setTextSize(journal.fontSize);
         }
     }
 
@@ -93,18 +92,26 @@ public class EditJournalFragment extends Fragment implements PopupMenu.OnMenuIte
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        switch(item.getItemId()){
+        Journal journal = viewModel.currentJournal.getValue();
+        if(journal == null) {
+            Log.e("NULLPTR", "Size Drop Down Couldn't Find View Model Journal");
+            return false;
+        }
+        switch (item.getItemId()) {
             case R.id.small:
-                binding.editText.setTextSize(14);
-                return true;
+                return setFontSize(journal, 14f);
             case R.id.medium:
-                binding.editText.setTextSize(18);
-                return true;
+                return setFontSize(journal, 18f);
             case R.id.large:
-                binding.editText.setTextSize(22);
-                return true;
+                return setFontSize(journal, 22f);
             default:
                 return false;
         }
+    }
+
+    private boolean setFontSize(Journal journal, float size) {
+        journal.fontSize = size;
+        binding.editText.setTextSize(size);
+        return true;
     }
 }
