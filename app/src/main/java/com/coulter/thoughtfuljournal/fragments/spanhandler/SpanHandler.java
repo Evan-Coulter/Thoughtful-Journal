@@ -4,19 +4,17 @@ import android.content.Context;
 import android.os.Parcelable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.List;
 
 public class SpanHandler {
     private final EditText editText;
     private Parcelable span;
     private final int start;
     private final int end;
-    private Context context;
+    private final Context context;
 
     public SpanHandler(Context context, EditText editText, Parcelable span, int start, int end) {
         this.editText = editText;
