@@ -12,12 +12,24 @@
         <action
             android:id="@+id/listToEdit"
             app:destination="@id/editJournalFragment" />
+        <action
+            android:id="@+id/listToRead"
+            app:destination="@id/readJournalFragment" />
     </fragment>
     <fragment
         android:id="@+id/editJournalFragment"
         android:name="com.coulter.thoughtfuljournal.fragments.EditJournalFragment"
         android:label="EditJournalFragment"
         tools:layout="@layout/edit_journal_fragment">
+        <action
+            android:id="@+id/editToList"
+            app:destination="@id/recyclerViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/readJournalFragment"
+        android:name="com.coulter.thoughtfuljournal.fragments.ReadJournalFragment"
+        android:label="ReadJournalFragment"
+        tools:layout="@layout/read_journal_fragment">
         <action
             android:id="@+id/editToList"
             app:destination="@id/recyclerViewFragment" />
