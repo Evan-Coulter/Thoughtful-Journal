@@ -14,7 +14,6 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 
 import org.jetbrains.annotations.NotNull;
 
-
 public class FABFragment extends Fragment {
     private ExtendedFloatingActionButton fab;
 
@@ -34,7 +33,7 @@ public class FABFragment extends Fragment {
         fab.setOnClickListener(clickedView->{
             JournalViewModel viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
             viewModel.postNewJournal();
-            ((MainActivity)requireActivity()).onClick(clickedView);
+            ((MainActivity)requireActivity()).navigate(R.id.listToEdit);
         });
         fab.animate().alpha(1.0f).setDuration(700).start();
     }

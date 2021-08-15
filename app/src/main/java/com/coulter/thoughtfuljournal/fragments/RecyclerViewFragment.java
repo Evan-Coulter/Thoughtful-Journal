@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
@@ -27,13 +26,14 @@ import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
 public class RecyclerViewFragment extends Fragment implements JournalListClickListener, MoreButtonClickListener, ResourceProvider {
     private RecyclerView recyclerView;
     private JournalListAdapter adapter;
+    private JournalViewModel viewModel;
 
-    public RecyclerViewFragment() {
-    }
+    public RecyclerViewFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_view_fragment, container, false);
+        viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
         setupRecyclerView(view);
         return view;
     }
@@ -57,9 +57,12 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
     @Override
     public void onItemClick(View view, int position) {
         Journal clickedJournal = adapter.getJournal(position);
-        JournalViewModel viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
         viewModel.postOldJournal(clickedJournal);
-        ((MainActivity) requireActivity()).onClick(null);
+        if(clickedJournal.isDraft) {
+            ((MainActivity) requireActivity()).navigate(R.id.listToEdit);
+        } else {
+            ((MainActivity) requireActivity()).navigate(R.id.listToRead);
+        }
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -70,13 +73,15 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
         popup.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.deleteButton:
-                    new ViewModelProvider(requireActivity()).get(JournalViewModel.class).delete(journal);
+                    viewModel.delete(journal);
                     return true;
                 case R.id.editorButton:
-                    Toast.makeText(requireActivity(), "Editor", Toast.LENGTH_SHORT).show();
+                    viewModel.postOldJournal(journal);
+                    ((MainActivity) requireActivity()).navigate(R.id.listToEdit);
                     return true;
                 case R.id.readerButton:
-                    Toast.makeText(requireActivity(), "Reader", Toast.LENGTH_SHORT).show();
+                    viewModel.postOldJournal(journal);
+                    ((MainActivity) requireActivity()).navigate(R.id.listToRead);
                     return true;
                 default:
                     return false;

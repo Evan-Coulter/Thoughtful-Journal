@@ -22,8 +22,9 @@
         android:label="EditJournalFragment"
         tools:layout="@layout/edit_journal_fragment">
         <action
-            android:id="@+id/editToList"
-            app:destination="@id/recyclerViewFragment" />
+            android:id="@+id/editToRead"
+            app:destination="@id/readJournalFragment"
+            app:popUpTo="@id/recyclerViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/readJournalFragment"
@@ -31,7 +32,8 @@
         android:label="ReadJournalFragment"
         tools:layout="@layout/read_journal_fragment">
         <action
-            android:id="@+id/editToList"
-            app:destination="@id/recyclerViewFragment" />
+            android:id="@+id/readToEdit"
+            app:destination="@id/editJournalFragment"
+            app:popUpTo="@id/recyclerViewFragment" />
     </fragment>
 </navigation>
