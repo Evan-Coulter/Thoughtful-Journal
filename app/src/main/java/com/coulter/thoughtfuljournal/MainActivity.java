@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setupNavigation();
         setupFragment(R.id.app_bar_container_main, new AppBarMain());
         setupFragment(R.id.fab_container_main, new FABFragment());
-        //recycler view and edit text fragments set by navigation api.
+        //Main content fragment set by navigation api.
     }
 
     private void setupFragment(int fragmentID, Fragment fragment) {
@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 .replace(fragmentID, fragment)
                 .commit();
     }
-
 
     @SuppressLint("NonConstantResourceId")
     private void setupNavigation() {
@@ -54,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             });
-
         }
     }
 
