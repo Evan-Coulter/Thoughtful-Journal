@@ -1,4 +1,4 @@
-package com.coulter.thoughtfuljournal.fragments.dialogs;
+package com.coulter.thoughtfuljournal.fragments;
 
 import android.os.Bundle;
 import android.text.Html;
@@ -30,11 +30,11 @@ public class SaveDialogFragment extends DialogFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.save_dialog_fragment, container, false);
         binding.setViewModel(new ViewModelProvider(requireActivity()).get(JournalViewModel.class));
         binding.dialogCancelButton.setOnClickListener(v->dismiss());
-        binding.dialogSaveButton.setOnClickListener(getSaveButtonListener(null));
+        binding.dialogSaveButton.setOnClickListener(getSaveButtonListener());
         return binding.getRoot();
     }
 
-    public View.OnClickListener getSaveButtonListener(Runnable callback) {
+    public View.OnClickListener getSaveButtonListener() {
         if(Objects.requireNonNull(binding.textField.getEditText()).getText().toString().equals("")){
             binding.textField.getEditText().setText(R.string.new_journal_title);
         }
@@ -45,12 +45,7 @@ public class SaveDialogFragment extends DialogFragment {
             //Refresh current layout.
             (requireActivity()).onBackPressed();
             ((MainActivity)requireActivity()).navigate(R.id.listToEdit);
-            if(callback!=null) callback.run();
             dismiss();
         };
-    }
-
-    public void addSaveCallback(Runnable callback) {
-        binding.dialogSaveButton.setOnClickListener(getSaveButtonListener(callback));
     }
 }

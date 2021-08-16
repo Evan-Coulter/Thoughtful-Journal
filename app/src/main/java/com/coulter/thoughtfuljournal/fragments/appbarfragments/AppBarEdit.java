@@ -8,13 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.databinding.AppBarFragmentBinding;
-import com.coulter.thoughtfuljournal.fragments.dialogs.SaveDialogFragment;
-import com.coulter.thoughtfuljournal.fragments.dialogs.SaveFirstDialog;
+import com.coulter.thoughtfuljournal.fragments.SaveDialogFragment;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -23,16 +21,11 @@ public class AppBarEdit extends AppBarFragment {
     @SuppressLint("NonConstantResourceId")
     @Override
     protected boolean handleOnOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.saveButton:
-                new SaveDialogFragment().show(requireActivity().getSupportFragmentManager(), "Save Dialog");
-                return true;
-            case R.id.openReaderButton:
-                new SaveFirstDialog().show(requireActivity().getSupportFragmentManager(), "Save First Dialog");
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.saveButton) {
+            new SaveDialogFragment().show(requireActivity().getSupportFragmentManager(), "Save Dialog");
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
