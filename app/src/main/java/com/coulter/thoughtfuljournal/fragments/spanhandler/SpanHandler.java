@@ -5,7 +5,6 @@ import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 public class SpanHandler {
@@ -13,51 +12,49 @@ public class SpanHandler {
     private final StyleSpan newSpan;
     private final int start;
     private final int end;
-    private final Context context;
     private Spannable text;
     private StyleSpan[] spans;
 
-    public SpanHandler(Context context, EditText editText, StyleSpan newSpan, int start, int end) {
+    public SpanHandler(EditText editText, StyleSpan newSpan, int start, int end) {
         this.editText = editText;
         this.newSpan = newSpan;
         this.start = start;
         this.end = end;
-        this.context = context;
     }
 
     public void start() {
         text = editText.getText();
         spans = text.getSpans(start, end, StyleSpan.class);
-        if(containsSpan()) {
-            if(containsTextWithoutSpan()) {
-                Toast.makeText(context, "Apply Span 1", Toast.LENGTH_SHORT).show();
+        if(containsSameStyleSpan()) {
+            if(containsTextWithoutSameStyleSpan()) {
                 applySpans();
             } else {
-                Toast.makeText(context, "Remove Span", Toast.LENGTH_SHORT).show();
                 removeSpans();
             }
         } else {
-            Toast.makeText(context, "Apply Span 2", Toast.LENGTH_SHORT).show();
             applySpans();
         }
         editText.setText(text);
         editText.setSelection(start, end);
     }
 
-    private boolean containsSpan() {
-        return spans.length > 0;
+    private boolean containsSameStyleSpan() {
+        for(StyleSpan span:spans) {
+            if(span.getStyle() == newSpan.getStyle()) return true;
+        }
+        return false;
     }
 
-    private boolean containsTextWithoutSpan() {
+    private boolean containsTextWithoutSameStyleSpan() {
         for(int i=start; i<end; i++) {
-            if(text.getSpans(i, i+1, StyleSpan.class).length==0) return true;
+            if(indexDoesNotContainSameStyleSpan(i)) return true;
         }
         return false;
     }
 
     private void applySpans() {
         for (int i=start; i<end; i++) {
-            if(text.getSpans(i, i+1, StyleSpan.class).length==0) {
+            if(indexDoesNotContainSameStyleSpan(i)) {
                 text.setSpan(new StyleSpan(newSpan.getStyle()), i, i+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
@@ -65,7 +62,17 @@ public class SpanHandler {
 
     private void removeSpans() {
         for(StyleSpan span:spans) {
-            text.removeSpan(span);
+            if(span.getStyle() == newSpan.getStyle()){
+                text.removeSpan(span);
+            }
         }
     }
+
+    private boolean indexDoesNotContainSameStyleSpan(int i) {
+        for (StyleSpan span:text.getSpans(i, i+1, StyleSpan.class)) {
+            if(span.getStyle() == newSpan.getStyle()) return false;
+        }
+        return true;
+    }
+
 }

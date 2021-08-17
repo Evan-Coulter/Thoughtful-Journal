@@ -82,7 +82,7 @@ public class EditJournalFragment extends Fragment implements PopupMenu.OnMenuIte
     }
 
     private void applyFormatting(ParcelableSpan span, int start, int end){
-        new SpanHandler(requireActivity(), binding.editText, (StyleSpan)span, start, end).start();
+        new SpanHandler(binding.editText, (StyleSpan)span, start, end).start();
     }
 
     private void displayError(Button button) {
