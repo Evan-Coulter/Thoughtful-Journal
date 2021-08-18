@@ -1,6 +1,5 @@
 package com.coulter.thoughtfuljournal.fragments.spanhandler;
 
-import android.content.Context;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
