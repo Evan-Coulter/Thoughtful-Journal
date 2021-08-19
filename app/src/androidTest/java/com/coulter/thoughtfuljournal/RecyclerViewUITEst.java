@@ -15,8 +15,7 @@ import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.*;
 import static androidx.test.espresso.assertion.ViewAssertions.*;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
-import static org.hamcrest.core.AllOf.allOf;
-import static org.hamcrest.core.Is.is;
+
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -26,21 +25,18 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.is;
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class FabUITest {
+public class RecyclerViewUITEst {
 
     @Rule
     public ActivityTestRule<SplashScreenActivity> mActivityTestRule = new ActivityTestRule<>(SplashScreenActivity.class);
 
     @Test
-    public void fabUITest() {
-        ViewInteraction button = onView(
-                allOf(withId(R.id.fab), withText("New Journal"), withContentDescription("New Journal Button"),
-                        withParent(withParent(withId(R.id.fab_container_main))),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-
+    public void recyclerViewUITEst() {
         ViewInteraction extendedFloatingActionButton = onView(
                 allOf(withId(R.id.fab), withText("New Journal"), withContentDescription("New Journal Button"),
                         childAtPosition(
@@ -70,12 +66,6 @@ public class FabUITest {
                         isDisplayed()));
         actionMenuItemView.perform(click());
 
-        ViewInteraction linearLayout = onView(
-                allOf(withParent(allOf(withId(android.R.id.content),
-                        withParent(IsInstanceOf.instanceOf(android.widget.FrameLayout.class)))),
-                        isDisplayed()));
-        linearLayout.check(matches(isDisplayed()));
-
         ViewInteraction textInputEditText = onView(
                 allOf(withText("New Journal"),
                         childAtPosition(
@@ -84,9 +74,19 @@ public class FabUITest {
                                         0),
                                 1),
                         isDisplayed()));
-        textInputEditText.perform(replaceText("Greeting"));
+        textInputEditText.perform(click());
 
         ViewInteraction textInputEditText2 = onView(
+                allOf(withText("New Journal"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.textField),
+                                        0),
+                                1),
+                        isDisplayed()));
+        textInputEditText2.perform(replaceText("Greeting"));
+
+        ViewInteraction textInputEditText3 = onView(
                 allOf(withText("Greeting"),
                         childAtPosition(
                                 childAtPosition(
@@ -94,7 +94,17 @@ public class FabUITest {
                                         0),
                                 1),
                         isDisplayed()));
-        textInputEditText2.perform(closeSoftKeyboard());
+        textInputEditText3.perform(closeSoftKeyboard());
+
+        ViewInteraction materialCheckBox = onView(
+                allOf(withId(R.id.checkBox), withText("Save as draft?"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        0),
+                                0),
+                        isDisplayed()));
+        materialCheckBox.perform(click());
 
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.dialogSaveButton), withText("Save"),
@@ -108,16 +118,23 @@ public class FabUITest {
 
         pressBack();
 
-        ViewInteraction viewGroup = onView(
-                allOf(withParent(withParent(withId(R.id.recycler_view))),
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.card_title), withText("Greeting"),
+                        withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView.class))),
                         isDisplayed()));
-        viewGroup.check(matches(isDisplayed()));
+        textView.check(matches(withText("Greeting")));
 
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.fab), withText("New Journal"), withContentDescription("New Journal Button"),
-                        withParent(withParent(withId(R.id.fab_container_main))),
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.journal_text), withText("Hello World!\n\n"),
+                        withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView.class))),
                         isDisplayed()));
-        button2.check(matches(isDisplayed()));
+        textView2.check(matches(isDisplayed()));
+
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.card_date), withText("DRAFT"),
+                        withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView.class))),
+                        isDisplayed()));
+        textView3.check(matches(withText("DRAFT")));
     }
 
     private static Matcher<View> childAtPosition(
