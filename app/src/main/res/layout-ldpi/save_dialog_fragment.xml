@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="32dp">
+        android:padding="12dp">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textField"
@@ -64,7 +64,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/robotobold"
                 android:text="@android:string/cancel"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 tools:ignore="ButtonOrder" />
 
             <com.google.android.material.button.MaterialButton
@@ -74,7 +74,8 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/robotobold"
                 android:text="@string/save_button"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 </layout>

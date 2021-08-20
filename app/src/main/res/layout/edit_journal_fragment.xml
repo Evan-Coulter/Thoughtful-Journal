@@ -32,14 +32,14 @@
                     android:background="#FFFFFF"
                     android:elevation="4dp"
                     android:gravity="top|start"
+                    android:imeOptions="actionDone"
                     android:importantForAutofill="no"
                     android:inputType="textMultiLine"
                     android:paddingStart="2dp"
                     android:paddingTop="8dp"
                     android:paddingEnd="2dp"
-                    tools:ignore="LabelFor"
                     android:textSize="18sp"
-                    />
+                    tools:ignore="LabelFor" />
 
             </LinearLayout>
         </ScrollView>
