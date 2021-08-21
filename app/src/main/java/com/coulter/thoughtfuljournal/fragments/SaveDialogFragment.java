@@ -17,6 +17,7 @@ import com.coulter.thoughtfuljournal.MainActivity;
 import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.databinding.SaveDialogFragmentBinding;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
@@ -46,6 +47,13 @@ public class SaveDialogFragment extends DialogFragment {
             (requireActivity()).onBackPressed();
             ((MainActivity)requireActivity()).navigate(R.id.listToEdit);
             dismiss();
+            if(viewModel.currentJournal.getValue()!=null) {
+                if(viewModel.currentJournal.getValue().isDraft) {
+                    Snackbar.make(requireActivity().findViewById(R.id.fragmentContainerView), "Journal saved as draft.", Snackbar.LENGTH_SHORT).show();
+                } else {
+                    Snackbar.make(requireActivity().findViewById(R.id.fragmentContainerView), "Journal saved.", Snackbar.LENGTH_SHORT).show();
+                }
+            }
         };
     }
 }
