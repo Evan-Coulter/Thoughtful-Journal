@@ -15,7 +15,8 @@
     app:mrl_rippleFadeDuration="75"
     app:mrl_rippleHover="false"
     app:mrl_rippleRoundedCorners="16dp"
-    app:mrl_rippleOverlay="true">
+    app:mrl_rippleOverlay="true"
+    app:mrl_rippleAlpha="0.1">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"

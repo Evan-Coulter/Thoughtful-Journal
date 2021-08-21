@@ -1,5 +1,6 @@
 package com.coulter.thoughtfuljournal.fragments.appbarfragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -24,14 +25,28 @@ public class AppBarRead extends AppBarFragment {
         return binding.getRoot();
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected boolean handleOnOptionsItemSelected(MenuItem item) {
-        Toast.makeText(requireActivity(), "Dynamicly Resize", Toast.LENGTH_SHORT).show();
-        return false;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                requireActivity().onBackPressed();
+                return true;
+            case R.id.dynamicSizeButton:
+                Toast.makeText(requireActivity(), "Dynamicly Resize", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
     protected int getMenuID() {
         return R.menu.read_app_bar_menu;
+    }
+
+    @Override
+    protected boolean shouldDisplayBackButton() {
+        return true;
     }
 }

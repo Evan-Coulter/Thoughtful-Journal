@@ -21,11 +21,16 @@ public class AppBarEdit extends AppBarFragment {
     @SuppressLint("NonConstantResourceId")
     @Override
     protected boolean handleOnOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.saveButton) {
-            new SaveDialogFragment().show(requireActivity().getSupportFragmentManager(), "Save Dialog");
-            return true;
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                requireActivity().onBackPressed();
+                return true;
+            case R.id.saveButton:
+                new SaveDialogFragment().show(requireActivity().getSupportFragmentManager(), "Save Dialog");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -39,5 +44,10 @@ public class AppBarEdit extends AppBarFragment {
         AppBarFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.app_bar_fragment, container, false);
         binding.setViewModel(new ViewModelProvider(requireActivity()).get(JournalViewModel.class));
         return binding.getRoot();
+    }
+
+    @Override
+    protected boolean shouldDisplayBackButton() {
+        return true;
     }
 }

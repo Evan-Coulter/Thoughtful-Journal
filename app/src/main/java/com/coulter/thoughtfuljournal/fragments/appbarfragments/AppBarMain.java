@@ -22,6 +22,9 @@ public class AppBarMain extends AppBarFragment {
     @Override
     protected boolean handleOnOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
+            case android.R.id.home:
+                requireActivity().onBackPressed();
+                return true;
             case R.id.sortButton:
                 Toast.makeText(requireActivity(), "Show Sort Menu", Toast.LENGTH_SHORT).show();
                 return true;
@@ -42,5 +45,10 @@ public class AppBarMain extends AppBarFragment {
     protected View setAndGetLayout(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Don't use data binding here.
         return inflater.inflate(R.layout.app_bar_fragment, container, false);
+    }
+
+    @Override
+    protected boolean shouldDisplayBackButton() {
+        return false;
     }
 }

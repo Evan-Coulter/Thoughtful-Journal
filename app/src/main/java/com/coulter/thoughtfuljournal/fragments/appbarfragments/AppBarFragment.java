@@ -21,6 +21,8 @@ import com.coulter.thoughtfuljournal.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public abstract class AppBarFragment extends Fragment {
     public AppBarFragment(){}
 
@@ -43,6 +45,10 @@ public abstract class AppBarFragment extends Fragment {
         Toolbar toolbar = view.findViewById(R.id.app_bar);
         toolbar.setTitleTextAppearance(requireActivity(), R.style.Widget_ThoughtfulJournal_Toolbar);
         ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
+        if(((AppCompatActivity)requireActivity()).getSupportActionBar() != null) {
+            Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar())
+                    .setDisplayHomeAsUpEnabled(shouldDisplayBackButton());
+        }
     }
 
     @Override
@@ -69,4 +75,5 @@ public abstract class AppBarFragment extends Fragment {
 
     protected abstract boolean handleOnOptionsItemSelected(MenuItem item);
     protected abstract int getMenuID();
+    protected abstract boolean shouldDisplayBackButton();
 }
