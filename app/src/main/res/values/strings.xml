@@ -28,4 +28,7 @@
     <string name="open_reader">Open Reader</string>
     <string name="saveFirstDescription">Save to ensure any edits to this journal are saved.</string>
     <string name="saveFirstTitle">Save before leaving?</string>
+    <string name="reader_font_size">Reader Text Size</string>
+    <string name="size_slider_description">Slider For Dynamically Changing Reader Font Size</string>
+    <string name="done">Done</string>
 </resources>

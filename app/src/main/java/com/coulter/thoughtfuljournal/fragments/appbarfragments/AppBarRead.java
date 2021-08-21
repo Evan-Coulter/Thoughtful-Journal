@@ -2,17 +2,20 @@ package com.coulter.thoughtfuljournal.fragments.appbarfragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.PopupWindow;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.databinding.AppBarFragmentBinding;
+import com.coulter.thoughtfuljournal.fragments.ResizeDialogFragment;
+import com.coulter.thoughtfuljournal.fragments.SaveDialogFragment;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +36,7 @@ public class AppBarRead extends AppBarFragment {
                 requireActivity().onBackPressed();
                 return true;
             case R.id.dynamicSizeButton:
-                Toast.makeText(requireActivity(), "Dynamicly Resize", Toast.LENGTH_SHORT).show();
+                new ResizeDialogFragment().show(requireActivity().getSupportFragmentManager(), "Save Dialog");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
