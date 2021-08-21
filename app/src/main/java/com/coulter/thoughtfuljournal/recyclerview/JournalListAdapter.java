@@ -1,6 +1,5 @@
 package com.coulter.thoughtfuljournal.recyclerview;
 
-import android.content.Context;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +9,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.coulter.thoughtfuljournal.R;
-import com.coulter.thoughtfuljournal.fragments.RecyclerViewFragment;
 import com.coulter.thoughtfuljournal.room.Journal;
-import com.google.android.material.card.MaterialCardView;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -1,6 +1,5 @@
 package com.coulter.thoughtfuljournal.recyclerview;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.balysv.materialripple.MaterialRippleLayout;
 import com.coulter.thoughtfuljournal.R;
 import com.google.android.material.card.MaterialCardView;
 
@@ -54,7 +54,7 @@ public class JournalListViewHolder extends RecyclerView.ViewHolder implements Vi
     }
 
     public void setBackground(int color) {
-        ((MaterialCardView)layout).setCardBackgroundColor(color);
+        ((MaterialCardView)layout.findViewById(R.id.card)).setCardBackgroundColor(color);
     }
 
     public void setDateColor(int color) {

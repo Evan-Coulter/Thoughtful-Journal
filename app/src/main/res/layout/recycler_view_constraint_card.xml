@@ -1,76 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    android:id="@+id/recyclerViewCard"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.balysv.materialripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/recyclerViewCard"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginBottom="8dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/corners"
     android:clickable="true"
     android:focusable="true"
-    app:cardBackgroundColor="@color/colorPrimaryLight"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="5dp">
+    app:mrl_rippleDuration="350"
+    app:mrl_rippleFadeDuration="75"
+    app:mrl_rippleHover="false"
+    app:mrl_rippleRoundedCorners="16dp"
+    app:mrl_rippleOverlay="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="120dp"
+        android:layout_margin="4dp"
+        app:cardBackgroundColor="@color/colorPrimaryLight"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp">
 
-        <TextView
-            android:id="@+id/card_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:fontFamily="@font/robotobold"
-            android:gravity="start|top"
-            android:maxLines="2"
-            android:text="@string/sample_title"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/card_date"
-            app:layout_constraintEnd_toStartOf="@+id/card_date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/card_date" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/moreButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:contentDescription="@string/more_button_description"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/more_icon"
-            app:tint="@color/black" />
+            <TextView
+                android:id="@+id/card_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/robotobold"
+                android:gravity="start|top"
+                android:maxLines="2"
+                android:text="@string/sample_title"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_date"
+                app:layout_constraintEnd_toStartOf="@+id/card_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/card_date" />
 
-        <TextView
-            android:id="@+id/card_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="sans-serif"
-            android:text="@string/sample_date"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/moreButton"
-            app:layout_constraintEnd_toStartOf="@+id/moreButton"
-            app:layout_constraintTop_toTopOf="@+id/moreButton" />
+            <ImageView
+                android:id="@+id/moreButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:contentDescription="@string/more_button_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/more_icon"
+                app:tint="@color/black" />
 
-        <TextView
-            android:id="@+id/journal_text"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="24dp"
-            android:gravity="start|top"
-            android:maxLines="2"
-            android:text="@string/sample_journal_text"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/moreButton"
-            app:layout_constraintStart_toStartOf="@+id/card_title"
-            app:layout_constraintTop_toBottomOf="@+id/card_title" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/card_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/sample_date"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/moreButton"
+                app:layout_constraintEnd_toStartOf="@+id/moreButton"
+                app:layout_constraintTop_toTopOf="@+id/moreButton" />
+
+            <TextView
+                android:id="@+id/journal_text"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="24dp"
+                android:gravity="start|top"
+                android:maxLines="2"
+                android:text="@string/sample_journal_text"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/moreButton"
+                app:layout_constraintStart_toStartOf="@+id/card_title"
+                app:layout_constraintTop_toBottomOf="@+id/card_title" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</com.balysv.materialripple.MaterialRippleLayout>
