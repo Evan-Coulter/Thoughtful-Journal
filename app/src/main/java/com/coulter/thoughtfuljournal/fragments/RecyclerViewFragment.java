@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,14 +20,23 @@ import com.coulter.thoughtfuljournal.recyclerview.JournalListAdapter;
 import com.coulter.thoughtfuljournal.recyclerview.JournalListClickListener;
 import com.coulter.thoughtfuljournal.recyclerview.MoreButtonClickListener;
 import com.coulter.thoughtfuljournal.recyclerview.ResourceProvider;
+import com.coulter.thoughtfuljournal.recyclerview.SortObserver;
+import com.coulter.thoughtfuljournal.recyclerview.SortSubject;
 import com.coulter.thoughtfuljournal.room.Journal;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 
-public class RecyclerViewFragment extends Fragment implements JournalListClickListener, MoreButtonClickListener, ResourceProvider {
+public class RecyclerViewFragment extends Fragment implements JournalListClickListener, MoreButtonClickListener, ResourceProvider, SortObserver {
     private RecyclerView recyclerView;
     private JournalListAdapter adapter;
     private JournalViewModel viewModel;
+    private List<Journal> cachedJournals;
 
     public RecyclerViewFragment() {}
 
@@ -35,23 +45,27 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
         View view = inflater.inflate(R.layout.recycler_view_fragment, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
         setupRecyclerView(view);
+        ((SortSubject)requireActivity()).attachSortObserver(this);
         return view;
     }
 
     private void setupRecyclerView(View view) {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        recyclerView.scheduleLayoutAnimation();
         new ViewModelProvider(requireActivity())
                 .get(JournalViewModel.class)
                 .getJournals()
-                .observe(requireActivity(), journals -> {
-                    adapter = new JournalListAdapter(journals);
-                    adapter.setOnClickListener(this);
-                    adapter.setOnMoreButtonClickListener(this);
-                    adapter.setResourceProvider(this);
-                    recyclerView.setAdapter(adapter);
-                });
+                .observe(requireActivity(), this::updateRecyclerView);
+    }
+
+    private void updateRecyclerView(List<Journal> journals) {
+        cachedJournals = journals;
+        adapter = new JournalListAdapter(journals);
+        adapter.setOnClickListener(this);
+        adapter.setOnMoreButtonClickListener(this);
+        adapter.setResourceProvider(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.scheduleLayoutAnimation();
     }
 
     @Override
@@ -94,5 +108,22 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
     @Override
     public Context getResourceProvider() {
         return requireActivity();
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onSortButtonClicked(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.sortByName:
+                Collections.sort(cachedJournals, (journal1, journal2) ->
+                        journal1.journal_name.compareToIgnoreCase(journal2.journal_name));
+                updateRecyclerView(cachedJournals);
+                break;
+            case  R.id.sortByDate:
+                Collections.sort(cachedJournals, (journal1, journal2) ->
+                        journal1.creation_date.compareTo(journal2.creation_date));
+                updateRecyclerView(cachedJournals);
+                break;
+        }
     }
 }

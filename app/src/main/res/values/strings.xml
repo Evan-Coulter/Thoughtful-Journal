@@ -31,4 +31,6 @@
     <string name="reader_font_size">Reader Text Size</string>
     <string name="size_slider_description">Slider For Dynamically Changing Reader Font Size</string>
     <string name="done">Done</string>
+    <string name="sort_by_name">Sort By Name</string>
+    <string name="sort_by_date">Sort By Date</string>
 </resources>

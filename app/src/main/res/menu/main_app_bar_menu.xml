@@ -12,5 +12,6 @@
         android:icon="@drawable/search_icon"
         android:title="@string/search_button"
         app:showAsAction="ifRoom"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         />
 </menu>

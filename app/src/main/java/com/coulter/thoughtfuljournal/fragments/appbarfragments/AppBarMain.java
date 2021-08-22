@@ -2,20 +2,24 @@ package com.coulter.thoughtfuljournal.fragments.appbarfragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.appcompat.widget.SearchView;
 
 import com.coulter.thoughtfuljournal.MainActivity;
 import com.coulter.thoughtfuljournal.R;
+import com.coulter.thoughtfuljournal.recyclerview.SortSubject;
+import com.coulter.thoughtfuljournal.room.Journal;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class AppBarMain extends AppBarFragment {
     @SuppressLint("NonConstantResourceId")
@@ -26,14 +30,23 @@ public class AppBarMain extends AppBarFragment {
                 requireActivity().onBackPressed();
                 return true;
             case R.id.sortButton:
-                Toast.makeText(requireActivity(), "Show Sort Menu", Toast.LENGTH_SHORT).show();
+                showSortPopup();
                 return true;
             case R.id.searchButton:
-                Toast.makeText(requireActivity(), "Show Search View", Toast.LENGTH_SHORT).show();
+                SearchView searchView = (SearchView)item.getActionView();
+                searchView.setOnQueryTextListener((MainActivity)requireActivity());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void showSortPopup() {
+        PopupMenu popup = new PopupMenu(requireActivity(), requireActivity().findViewById(R.id.app_bar));
+        popup.setGravity(Gravity.END);
+        popup.setOnMenuItemClickListener(item -> ((SortSubject)requireActivity()).notifySortButtonClicked(item));
+        popup.inflate(R.menu.sort_popup_menu);
+        popup.show();
     }
 
     @Override

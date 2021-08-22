@@ -54,18 +54,7 @@ public abstract class AppBarFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(getMenuID(), menu);
-        setIconColor(menu);
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    private void setIconColor(Menu menu) {
-        for(int i=0; i<menu.size(); i++) {
-            Drawable drawable = menu.getItem(i).getIcon();
-            if(drawable!=null) {
-                drawable.mutate();
-                drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(requireActivity(), R.color.black), PorterDuff.Mode.SRC_ATOP));
-            }
-        }
     }
 
     @Override
