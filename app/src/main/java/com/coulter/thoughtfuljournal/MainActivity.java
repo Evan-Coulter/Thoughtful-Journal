@@ -16,12 +16,15 @@ import com.coulter.thoughtfuljournal.fragments.FABFragment;
 import com.coulter.thoughtfuljournal.fragments.appbarfragments.AppBarFragment;
 import com.coulter.thoughtfuljournal.fragments.appbarfragments.AppBarMain;
 import com.coulter.thoughtfuljournal.fragments.appbarfragments.AppBarRead;
+import com.coulter.thoughtfuljournal.recyclerview.FilterObserver;
+import com.coulter.thoughtfuljournal.recyclerview.FilterSubject;
 import com.coulter.thoughtfuljournal.recyclerview.SortObserver;
 import com.coulter.thoughtfuljournal.recyclerview.SortSubject;
 
-public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, SortSubject {
+public class MainActivity extends AppCompatActivity implements SortSubject, FilterSubject {
     private NavController navController;
-    private SortObserver observer;
+    private SortObserver sortObserver;
+    private FilterObserver filterObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,25 +74,28 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
-    }
-
-    @Override
     public void attachSortObserver(SortObserver observer) {
-        this.observer = observer;
+        this.sortObserver = observer;
     }
 
     @Override
     public boolean notifySortButtonClicked(MenuItem clickedMenuItem) {
-        if(observer!=null) {
-            observer.onSortButtonClicked(clickedMenuItem);
+        if(sortObserver !=null) {
+            sortObserver.onSortButtonClicked(clickedMenuItem);
         }
         return true;
+    }
+
+    @Override
+    public void attachFilterObserver(FilterObserver observer) {
+        this.filterObserver = observer;
+    }
+
+    @Override
+    public SearchView.OnQueryTextListener getOnQueryTextListener() {
+        if(filterObserver != null) {
+            return filterObserver.provideOnQueryTextListener();
+        }
+        return null;
     }
 }

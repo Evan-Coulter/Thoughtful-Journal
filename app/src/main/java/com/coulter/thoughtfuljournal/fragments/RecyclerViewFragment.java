@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.PopupMenu;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.coulter.thoughtfuljournal.MainActivity;
 import com.coulter.thoughtfuljournal.R;
+import com.coulter.thoughtfuljournal.recyclerview.FilterObserver;
+import com.coulter.thoughtfuljournal.recyclerview.FilterSubject;
 import com.coulter.thoughtfuljournal.recyclerview.JournalListAdapter;
 import com.coulter.thoughtfuljournal.recyclerview.JournalListClickListener;
 import com.coulter.thoughtfuljournal.recyclerview.MoreButtonClickListener;
@@ -24,19 +28,18 @@ import com.coulter.thoughtfuljournal.recyclerview.SortObserver;
 import com.coulter.thoughtfuljournal.recyclerview.SortSubject;
 import com.coulter.thoughtfuljournal.room.Journal;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 
-public class RecyclerViewFragment extends Fragment implements JournalListClickListener, MoreButtonClickListener, ResourceProvider, SortObserver {
+public class RecyclerViewFragment extends Fragment implements JournalListClickListener, MoreButtonClickListener, ResourceProvider, SortObserver, SearchView.OnQueryTextListener, FilterObserver {
     private RecyclerView recyclerView;
     private JournalListAdapter adapter;
     private JournalViewModel viewModel;
     private List<Journal> cachedJournals;
+    private List<Journal> unfilteredJournals;
 
     public RecyclerViewFragment() {}
 
@@ -46,16 +49,16 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
         viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
         setupRecyclerView(view);
         ((SortSubject)requireActivity()).attachSortObserver(this);
+        ((FilterSubject)requireActivity()).attachFilterObserver(this);
+
         return view;
     }
 
     private void setupRecyclerView(View view) {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        new ViewModelProvider(requireActivity())
-                .get(JournalViewModel.class)
-                .getJournals()
-                .observe(requireActivity(), this::updateRecyclerView);
+        viewModel.getJournals().observe(requireActivity(), this::updateRecyclerView);
+        viewModel.getJournals().observe(requireActivity(), journals -> unfilteredJournals = new ArrayList<>(journals));
     }
 
     private void updateRecyclerView(List<Journal> journals) {
@@ -125,5 +128,26 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
                 updateRecyclerView(cachedJournals);
                 break;
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        if(newText.isEmpty()) {
+            Toast.makeText(requireActivity(), Integer.valueOf(unfilteredJournals.size()).toString(), Toast.LENGTH_SHORT).show();
+            updateRecyclerView(unfilteredJournals);
+            Toast.makeText(requireActivity(), Integer.valueOf(unfilteredJournals.size()).toString(), Toast.LENGTH_SHORT).show();
+        }
+        adapter.getFilter().filter(newText);
+        return false;
+    }
+
+    @Override
+    public SearchView.OnQueryTextListener provideOnQueryTextListener() {
+        return this;
     }
 }
