@@ -5,10 +5,12 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -32,6 +34,10 @@ public class SaveDialogFragment extends DialogFragment {
         binding.setViewModel(new ViewModelProvider(requireActivity()).get(JournalViewModel.class));
         binding.dialogCancelButton.setOnClickListener(v->dismiss());
         binding.dialogSaveButton.setOnClickListener(getSaveButtonListener());
+        if(Objects.requireNonNull(getDialog()).getWindow()!=null) {
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+            getDialog().getWindow().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.dialog_background,null));
+        }
         return binding.getRoot();
     }
 

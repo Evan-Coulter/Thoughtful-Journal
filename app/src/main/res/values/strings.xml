@@ -33,4 +33,10 @@
     <string name="done">Done</string>
     <string name="sort_by_name">Sort By Name</string>
     <string name="sort_by_date">Sort By Date</string>
+    <string name="help">Help</string>
+    <string name="ok">OK</string>
+    <string name="writing_journals">Writing Journals,</string>
+    <string name="journal_instructions">To get started, hit the \"New Journal\" button on the home screen. From there you can create a new journal and hit the save button in the top right when you\'re ready to save.</string>
+    <string name="reporting_issues">Reporting Issues,</string>
+    <string name="reporting_issues_instructions">If you find any issues with the app please let me know at dev.issues.app@gmail.com and I\'d be happy to try to fix them for you. I\'d also be interested in hearing what can be done to improve the app.</string>
 </resources>

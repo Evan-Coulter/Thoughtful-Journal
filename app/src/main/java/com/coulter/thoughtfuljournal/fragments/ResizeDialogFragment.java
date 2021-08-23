@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,6 +23,8 @@ import com.google.android.material.slider.Slider;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class ResizeDialogFragment extends DialogFragment {
     public ResizeDialogFragment(){}
 
@@ -30,6 +34,9 @@ public class ResizeDialogFragment extends DialogFragment {
         ResizeDialogFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.resize_dialog_fragment, container, false);
         setupSlider(binding.sizeSlider);
         setupDoneButton(binding.doneButton);
+        if(Objects.requireNonNull(getDialog()).getWindow()!=null) {
+            getDialog().getWindow().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.dialog_background,null));
+        }
         return binding.getRoot();
     }
 

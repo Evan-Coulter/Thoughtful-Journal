@@ -15,6 +15,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
 
 import com.coulter.thoughtfuljournal.R;
+import com.coulter.thoughtfuljournal.fragments.HelpDialogFragment;
 import com.coulter.thoughtfuljournal.recyclerview.FilterSubject;
 import com.coulter.thoughtfuljournal.recyclerview.SortSubject;
 
@@ -31,6 +32,9 @@ public class AppBarMain extends AppBarFragment {
                 return true;
             case R.id.sortButton:
                 showSortPopup();
+                return true;
+            case R.id.helpButton:
+                new HelpDialogFragment().show(requireActivity().getSupportFragmentManager(), "Help Dialog");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
