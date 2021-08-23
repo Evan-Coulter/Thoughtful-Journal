@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -70,7 +71,12 @@ public class MainActivity extends AppCompatActivity implements SortSubject, Filt
     }
 
     public void navigate(int actionID) {
-        navController.navigate(actionID);
+        try {
+            navController.navigate(actionID);
+        } catch(IllegalArgumentException exception) {
+            Log.e("Navigation Error", "An impossible navigation was attempted.");
+            exception.printStackTrace();
+        }
     }
 
     @Override

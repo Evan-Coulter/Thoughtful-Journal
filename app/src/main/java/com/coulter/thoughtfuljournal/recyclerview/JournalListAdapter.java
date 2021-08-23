@@ -4,8 +4,6 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,13 +14,11 @@ import com.coulter.thoughtfuljournal.room.Journal;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
 
-public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHolder> implements Filterable {
+public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHolder> {
     private final List<Journal> journals;
     private JournalListClickListener clickListener;
     private MoreButtonClickListener moreButtonClickListener;
@@ -86,35 +82,5 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListViewHold
 
     public void setResourceProvider(ResourceProvider resourceProvider) {
         this.resourceProvider = resourceProvider;
-    }
-
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                List<Journal> filteredList = new ArrayList<>();
-                if(constraint.toString().isEmpty()) {
-                    filteredList.addAll(journals);
-                } else {
-                    for (Journal journal:journals) {
-                        if(journal.journal_name.toLowerCase().contains(constraint.toString().toLowerCase())
-                        || journal.journal_content.toLowerCase().contains(constraint.toString().toLowerCase())) {
-                            filteredList.add(journal);
-                        }
-                    }
-                }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = filteredList;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                journals.clear();
-                journals.addAll((Collection<? extends Journal>) results.values);
-                notifyDataSetChanged();
-            }
-        };
     }
 }

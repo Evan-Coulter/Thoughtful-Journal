@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
@@ -38,7 +37,7 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
     private RecyclerView recyclerView;
     private JournalListAdapter adapter;
     private JournalViewModel viewModel;
-    private List<Journal> cachedJournals;
+    private List<Journal> filteredJournals;
     private List<Journal> unfilteredJournals;
 
     public RecyclerViewFragment() {}
@@ -50,25 +49,26 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
         setupRecyclerView(view);
         ((SortSubject)requireActivity()).attachSortObserver(this);
         ((FilterSubject)requireActivity()).attachFilterObserver(this);
-
         return view;
     }
 
     private void setupRecyclerView(View view) {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        viewModel.getJournals().observe(requireActivity(), this::updateRecyclerView);
-        viewModel.getJournals().observe(requireActivity(), journals -> unfilteredJournals = new ArrayList<>(journals));
+        viewModel.getJournals().observe(requireActivity(), journals->{
+            unfilteredJournals = new ArrayList<>(journals);
+            updateRecyclerView(unfilteredJournals);
+            recyclerView.scheduleLayoutAnimation();
+        });
     }
 
     private void updateRecyclerView(List<Journal> journals) {
-        cachedJournals = journals;
+        filteredJournals = journals;
         adapter = new JournalListAdapter(journals);
         adapter.setOnClickListener(this);
         adapter.setOnMoreButtonClickListener(this);
         adapter.setResourceProvider(this);
         recyclerView.setAdapter(adapter);
-        recyclerView.scheduleLayoutAnimation();
     }
 
     @Override
@@ -118,14 +118,14 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
     public void onSortButtonClicked(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.sortByName:
-                Collections.sort(cachedJournals, (journal1, journal2) ->
+                Collections.sort(filteredJournals, (journal1, journal2) ->
                         journal1.journal_name.compareToIgnoreCase(journal2.journal_name));
-                updateRecyclerView(cachedJournals);
+                updateRecyclerView(filteredJournals);
                 break;
             case  R.id.sortByDate:
-                Collections.sort(cachedJournals, (journal1, journal2) ->
+                Collections.sort(filteredJournals, (journal1, journal2) ->
                         journal1.creation_date.compareTo(journal2.creation_date));
-                updateRecyclerView(cachedJournals);
+                updateRecyclerView(filteredJournals);
                 break;
         }
     }
@@ -137,12 +137,18 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        List<Journal> filteredList = new ArrayList<>();
         if(newText.isEmpty()) {
-            Toast.makeText(requireActivity(), Integer.valueOf(unfilteredJournals.size()).toString(), Toast.LENGTH_SHORT).show();
-            updateRecyclerView(unfilteredJournals);
-            Toast.makeText(requireActivity(), Integer.valueOf(unfilteredJournals.size()).toString(), Toast.LENGTH_SHORT).show();
+            filteredList.addAll(unfilteredJournals);
+        } else {
+            for (Journal journal: unfilteredJournals) {
+                if(journal.journal_name.toLowerCase().contains(newText.toLowerCase())
+                || journal.journal_content.toLowerCase().contains(newText.toLowerCase())) {
+                    filteredList.add(journal);
+                }
+            }
         }
-        adapter.getFilter().filter(newText);
+        updateRecyclerView(filteredList);
         return false;
     }
 
