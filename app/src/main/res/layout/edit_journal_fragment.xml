@@ -35,9 +35,12 @@
                     android:imeOptions="actionDone"
                     android:importantForAutofill="no"
                     android:inputType="textMultiLine"
+                    android:overScrollMode="always"
                     android:paddingStart="2dp"
                     android:paddingTop="8dp"
                     android:paddingEnd="2dp"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
                     android:textSize="18sp"
                     tools:ignore="LabelFor" />
 
