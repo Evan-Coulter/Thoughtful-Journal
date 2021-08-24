@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.coulter.thoughtfuljournal.MainActivity;
 import com.coulter.thoughtfuljournal.R;
+import com.coulter.thoughtfuljournal.fragments.dialogs.DeleteDialogFragment;
 import com.coulter.thoughtfuljournal.recyclerview.FilterObserver;
 import com.coulter.thoughtfuljournal.recyclerview.FilterSubject;
 import com.coulter.thoughtfuljournal.recyclerview.JournalListAdapter;
@@ -90,7 +91,9 @@ public class RecyclerViewFragment extends Fragment implements JournalListClickLi
         popup.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.deleteButton:
-                    viewModel.delete(journal);
+                    DeleteDialogFragment deleteDialog = new DeleteDialogFragment();
+                    deleteDialog.setJournal(journal);
+                    deleteDialog.show(requireActivity().getSupportFragmentManager(), "Delete Dialog");
                     return true;
                 case R.id.editorButton:
                     viewModel.postOldJournal(journal);

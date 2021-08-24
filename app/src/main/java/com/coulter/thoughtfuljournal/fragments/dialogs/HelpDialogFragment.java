@@ -1,9 +1,11 @@
-package com.coulter.thoughtfuljournal.fragments;
+package com.coulter.thoughtfuljournal.fragments.dialogs;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
@@ -23,14 +25,14 @@ public class HelpDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        HelpDialogFragmentBinding binding = HelpDialogFragmentBinding.inflate(inflater, container, false);
+        HelpDialogFragmentBinding binding = HelpDialogFragmentBinding.inflate(inflater, container, true);
         binding.okButton.setOnClickListener(v->dismiss());
         if(Objects.requireNonNull(getDialog()).getWindow()!=null) {
-            getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             getDialog().getWindow().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.dialog_background,null));
         }
         return binding.getRoot();
     }
+
 }
 
 

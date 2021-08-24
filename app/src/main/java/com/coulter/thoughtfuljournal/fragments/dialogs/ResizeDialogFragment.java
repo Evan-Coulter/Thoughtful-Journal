@@ -1,4 +1,4 @@
-package com.coulter.thoughtfuljournal.fragments;
+package com.coulter.thoughtfuljournal.fragments.dialogs;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

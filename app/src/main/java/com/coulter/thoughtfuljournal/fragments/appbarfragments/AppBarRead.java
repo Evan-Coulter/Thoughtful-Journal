@@ -2,20 +2,17 @@ package com.coulter.thoughtfuljournal.fragments.appbarfragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupWindow;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.databinding.AppBarFragmentBinding;
-import com.coulter.thoughtfuljournal.fragments.ResizeDialogFragment;
-import com.coulter.thoughtfuljournal.fragments.SaveDialogFragment;
+import com.coulter.thoughtfuljournal.fragments.dialogs.ResizeDialogFragment;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
 
 import org.jetbrains.annotations.NotNull;

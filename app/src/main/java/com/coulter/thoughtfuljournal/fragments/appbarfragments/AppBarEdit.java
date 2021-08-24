@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.coulter.thoughtfuljournal.R;
 import com.coulter.thoughtfuljournal.databinding.AppBarFragmentBinding;
-import com.coulter.thoughtfuljournal.fragments.SaveDialogFragment;
+import com.coulter.thoughtfuljournal.fragments.dialogs.SaveDialogFragment;
 import com.coulter.thoughtfuljournal.viewmodel.JournalViewModel;
 
 import org.jetbrains.annotations.NotNull;

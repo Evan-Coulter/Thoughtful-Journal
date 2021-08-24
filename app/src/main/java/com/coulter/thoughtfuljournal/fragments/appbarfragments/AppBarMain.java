@@ -15,7 +15,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
 
 import com.coulter.thoughtfuljournal.R;
-import com.coulter.thoughtfuljournal.fragments.HelpDialogFragment;
+import com.coulter.thoughtfuljournal.fragments.dialogs.HelpDialogFragment;
 import com.coulter.thoughtfuljournal.recyclerview.FilterSubject;
 import com.coulter.thoughtfuljournal.recyclerview.SortSubject;
 
