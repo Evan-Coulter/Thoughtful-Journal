@@ -49,9 +49,7 @@ public class SaveDialogFragment extends DialogFragment {
             JournalViewModel viewModel = new ViewModelProvider(requireActivity()).get(JournalViewModel.class);
             Objects.requireNonNull(viewModel.currentJournal.getValue()).journal_content = Html.toHtml(((EditText)requireActivity().findViewById(R.id.editText)).getText());
             viewModel.insert(viewModel.currentJournal.getValue());
-            //Refresh current layout.
             (requireActivity()).onBackPressed();
-            ((MainActivity)requireActivity()).navigate(R.id.listToEdit);
             dismiss();
             if(viewModel.currentJournal.getValue()!=null) {
                 if(viewModel.currentJournal.getValue().isDraft) {
